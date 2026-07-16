@@ -20,7 +20,7 @@ user = "root"
 environment_mode = "separate"
 
 [verifier.environment]
-network_mode = "no-network"
+network_mode = "public"
 build_timeout_sec = 600.0
 os = "linux"
 
