@@ -1,0 +1,309 @@
+\subsection{Per-Task Design Notes}
+\label{sec:task-by-task-design-notes}
+
+This appendix gives per-task design notes for the 134-task \benchmark{} suite.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{4pt}
+\newcommand{\tasknoterule}{\specialrule{0.12pt}{0.6pt}{0.6pt}}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.77\linewidth}@{}}
+\BenchTopRule
+Task & Design notes \\
+\BenchMidRule
+\endfirsthead
+\BenchTopRule
+Task & Design notes \\
+\BenchMidRule
+\endhead
+\BenchMidRule
+\multicolumn{2}{r}{\emph{Continued on next page}} \\
+\endfoot
+\BenchBottomRule
+\noalign{\vskip 0.75em}
+\caption{Per-task design notes for all 134 \benchmark{} tasks.}\label{tab:task-notes-all}\\
+\endlastfoot
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Systems \& Software Engineering}} \\
+\BenchMidRule
+\texttt{ann\_\allowbreak{}vector\_\allowbreak{}search\_\allowbreak{}qps} & Replace a brute-force NumPy nearest-neighbor baseline with a high-performance approximate nearest-neighbor implementation under a hard recall constraint. Scored by queries per second. \\
+\tasknoterule
+\texttt{arc\_\allowbreak{}compiler\_\allowbreak{}runtime} & Implement a complete TypeScript compiler pipeline (lexer, parser, type checker, code generator) for a novel programming language defined by specification documents. \\
+\tasknoterule
+\texttt{rust\_\allowbreak{}multicrate\_\allowbreak{}reconstruction} & Reconstruct missing Rust implementations across a multi-crate content-addressable storage workspace, given only type signatures and public API contracts. \\
+\tasknoterule
+\texttt{codeflash\_\allowbreak{}repair\_\allowbreak{}performance} & Diagnose and repair intentionally degraded modules in a Python code-optimization tool spanning CST manipulation, profiling infrastructure, and test harness integration. Scored on both functional correctness and runtime performance. \\
+\tasknoterule
+\texttt{copier\_\allowbreak{}modular\_\allowbreak{}refactor} & Implement six architectural targets in the Copier Python scaffolding library: structured exceptions, template management, version compatibility, rendering modes, a worker class, and a user-data layer. \\
+\tasknoterule
+\texttt{dependent\_\allowbreak{}type\_\allowbreak{}checker} & Build a complete dependent type checker in Rust for a subset of Martin-L\"{o}f Type Theory, supporting cumulative universes, Pi/Sigma types, general inductive types with positivity checking, and universe polymorphism. Scored on both correctness and normalization throughput. \\
+\tasknoterule
+\texttt{entt\_\allowbreak{}graph\_\allowbreak{}module} & Implement seven feature targets in the EnTT C++ entity-component-system framework, including a graph module with adjacency matrix, a task-graph builder with transitive reduction, DOT export, and several core utility additions. \\
+\tasknoterule
+\texttt{exchange\_\allowbreak{}core\_\allowbreak{}throughput} & Maximize peak throughput of a Java financial matching engine built on the LMAX Disruptor by tuning thread topology, wait strategies, ring-buffer sizing, order-book implementation, and JVM configuration. \\
+\tasknoterule
+\texttt{ffmpeg\_\allowbreak{}swscale\_\allowbreak{}reimplementation} & Reimplement FFmpeg's libswscale pixel-format conversion and scaling library in Rust, handling multiple pixel formats and scaling algorithms. A correctness-passing scaffold is provided; the agent must optimize for speed via SIMD. \\
+\tasknoterule
+\texttt{git\_\allowbreak{}rewrite\_\allowbreak{}in\_\allowbreak{}zig} & Reimplement git as a drop-in Zig binary producing identical CLI output, exit codes, and repository state as the C reference implementation. The C source is available for reading but cannot be compiled. \\
+\tasknoterule
+\texttt{high\_\allowbreak{}performance\_\allowbreak{}object\_\allowbreak{}mapper} & Implement a .NET object-to-object mapping library using expression-tree compilation and IL emission, handling flat/nested mapping, collections, custom type converters, nullables, and inheritance hierarchies. \\
+\tasknoterule
+\texttt{integer\_\allowbreak{}compression\_\allowbreak{}codec} & Improve a C++ integer compression codec for better compression ratio and decode throughput on uint32 datasets via techniques such as delta encoding, bit-packing, and SIMD vectorization. Exact round-trip correctness is mandatory. \\
+\tasknoterule
+\texttt{juliet\_\allowbreak{}vulnerability\_\allowbreak{}analyzer} & Implement a deterministic static analyzer that processes structured program facts to detect vulnerabilities across six CWE categories (stack/heap overflow, integer overflow, null dereference, use-after-free, command injection). \\
+\tasknoterule
+\texttt{libexpat\_\allowbreak{}x86\_\allowbreak{}assembly} & Reimplement the libexpat XML parser entirely in x86-64 assembly, producing an ABI-compatible shared library. No C compiler is available---only assembler, linker, and libc. \\
+\tasknoterule
+\texttt{odata\_\allowbreak{}query\_\allowbreak{}service} & Complete a .NET OData query processing library: query-string parsing, LINQ expression-tree generation for filtering, multi-field sorting, pagination, field projection, and ASP.NET Core middleware integration. \\
+\tasknoterule
+\texttt{litestar\_\allowbreak{}infra\_\allowbreak{}refactor} & Implement five async infrastructure subsystems in the Litestar Python web framework: key-value stores with expiry, an event bus, WebSocket listener abstractions, a DTO framework, and a channels pub/sub system. \\
+\tasknoterule
+\texttt{lua\_\allowbreak{}native\_\allowbreak{}compiler} & Build a Lua 5.4 ahead-of-time native compiler that reads Lua source and emits standalone ELF executables with real x86-64 machine code---not C API call sequences or bytecode dispatch loops. Output must match the reference interpreter byte-for-byte. \\
+\tasknoterule
+\texttt{mimesis\_\allowbreak{}modular\_\allowbreak{}refactor} & Implement seven refactoring targets in the Mimesis Python fake-data library: a declarative schema class, an enum system with metaclass-driven random selection, and five data providers spanning payments, cryptography, science, internet, and unit systems. \\
+\tasknoterule
+\texttt{nlohmann\_\allowbreak{}json\_\allowbreak{}modularization} & Implement five feature targets in the nlohmann/json C++ library: UBJSON binary serialization, JSON Merge Patch (RFC 7386), Grisu2 shortest-representation float formatting, a range-based iteration interface, and library metadata macros. \\
+\tasknoterule
+\texttt{notebook\_\allowbreak{}lossless\_\allowbreak{}compression} & Build a lossless compression pipeline for Jupyter notebooks with a training phase (dictionary learning from a visible corpus) and per-file compression/decompression. Scored by overall compression ratio; byte-exact reconstruction is mandatory. \\
+\tasknoterule
+\texttt{packer\_\allowbreak{}plugin\_\allowbreak{}datasources} & Implement six targets in HashiCorp Packer's Go plugin ecosystem: address parsing with DNS validation, filesystem-based plugin discovery with checksum verification, HCL2 data-block integration, sensitive value handling, and new template functions. \\
+\tasknoterule
+\texttt{pocketbase\_\allowbreak{}backend\_\allowbreak{}architecture} & Implement four architectural targets in PocketBase (Go): a chain-based hook/event system, an HTTP router with middleware stacking, a dynamic OAuth2 provider registry, and a regex-based random string generator. \\
+\tasknoterule
+\texttt{pocketbase\_\allowbreak{}tools\_\allowbreak{}extensions} & Implement four Go utility packages for PocketBase: a REST JSON serializer with nested field picking, a zip archive utility, a cron scheduler with timezone support, and a SQL index parser/builder. \\
+\tasknoterule
+\texttt{postgres\_\allowbreak{}wire\_\allowbreak{}on\_\allowbreak{}sqlite} & Implement a server that speaks the PostgreSQL wire protocol (v3) using SQLite as the storage backend, handling authentication, simple and extended query protocols, type mapping, transactions, and system catalog queries. Scored by pass rate on PostgreSQL's own test suites. \\
+\tasknoterule
+\texttt{quic\_\allowbreak{}transport\_\allowbreak{}stack} & Implement a subset of the QUIC transport protocol (RFC 9000): connection establishment, TLS 1.3 key derivation, AEAD encryption, packet number encoding, header protection, and core frame types. \\
+\tasknoterule
+\texttt{regex\_\allowbreak{}automata\_\allowbreak{}repair} & Repair broken implementations in Rust's regex-automata crate spanning NFA compilation, DFA transition construction, Unicode handling, capture groups, and the hybrid matching engine. \\
+\tasknoterule
+\texttt{schemathesis\_\allowbreak{}datagen\_\allowbreak{}pipeline} & Implement eight feature targets in the Schemathesis Python API testing framework, including structured HTTP header generation strategies, coverage-phase hooks, discriminator-aware validation and data generation, and schema-driven code generation fixes. \\
+\tasknoterule
+\texttt{schemathesis\_\allowbreak{}reporting\_\allowbreak{}observability} & Implement five targets in Schemathesis: a post-validation hook system, multi-format test report writers (VCR, HAR, JUnit, NDJSON), pytest plugin integration, and schema-branch-aware example generation. \\
+\tasknoterule
+\texttt{schemathesis\_\allowbreak{}config\_\allowbreak{}modernization} & Implement six modernization targets in Schemathesis: a TOML-based configuration system with auto-discovery, API namespace reorganization, a metrics framework, transport and response abstractions, and a redesigned check registration system. \\
+\tasknoterule
+\texttt{stream\_\allowbreak{}processing\_\allowbreak{}engine} & Implement a Rust-based stream processing engine supporting windowed aggregations, filtering, projection, and stateful operators over JSON event streams. Scored on correctness, robustness to malformed input, and throughput. \\
+\tasknoterule
+\texttt{tls13\_\allowbreak{}handshake\_\allowbreak{}state\_\allowbreak{}machine} & Complete a Python TLS 1.3 protocol state machine that processes handshake message traces, implementing state transitions, key schedule computation, and message validation using a provided crypto API. \\
+\tasknoterule
+\texttt{vault\_\allowbreak{}sdk\_\allowbreak{}resilience} & Implement five targets in HashiCorp Vault's Go SDK: a string template engine, a fair-share job scheduler, persistent cache storage for agent tokens, certificate utility enhancements, and API client request/response hooks. \\
+\tasknoterule
+\texttt{vliw\_\allowbreak{}kernel\_\allowbreak{}optimization} & Optimize a VLIW/SIMD kernel generator for correctness and minimum cycle count on a custom architecture simulator. Hard-coded answers for specific inputs are forbidden. \\
+\tasknoterule
+\texttt{cpu\_\allowbreak{}full\_\allowbreak{}flow} & Work through a full RISC-V CPU design curriculum: ISA emulator implementation, hardware abstraction layer, Verilog processor design, and SoC integration with Verilator simulation. \\
+\tasknoterule
+\texttt{zstd\_\allowbreak{}api\_\allowbreak{}modernization} & Implement five API evolution targets in Zstandard's C library: stable struct alignment and query functions, a generic parameter-driven compression interface, static allocation support, dictionary enhancements, and memory estimation utilities. \\
+\tasknoterule
+\texttt{cfzip\_\allowbreak{}compression\_\allowbreak{}engine} & Implement a complete compression engine from scratch in C++17 without external libraries: custom archive format, CLI with streaming mode, dictionary training and use, and integrity verification. Scored on compression ratio, speed, memory usage, and correctness. \\
+\BenchMidRule
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Scientific Problems \& ML}} \\
+\BenchMidRule
+\texttt{battery\_\allowbreak{}soh\_\allowbreak{}rul\_\allowbreak{}anomaly} & Predict battery state-of-health, remaining useful life, and anomaly type/severity per cycle for unseen cells, given multi-cell degradation training data. Evaluated under distributional shift with regime and calibration changes not present in training. \\
+\tasknoterule
+\texttt{borden\_\allowbreak{}pump\_\allowbreak{}treat\_\allowbreak{}dispatch} & Build a physics-based groundwater flow model and solve a constrained multi-objective optimization for pump-and-treat remediation on the Borden aquifer, selecting wells, treatment types, and multi-phase schedules under budget and capacity constraints. \\
+\tasknoterule
+\texttt{borden\_\allowbreak{}source\_\allowbreak{}inversion} & Infer a finite-duration rectangular contaminant source from sparse, noisy monitoring-well observations in a 3D hydrogeological scene. The agent must implement its own forward model and inversion optimizer from scratch. \\
+\tasknoterule
+\texttt{borden\_\allowbreak{}sensor\_\allowbreak{}fault\_\allowbreak{}diagnosis} & Classify sensor faults (spikes, drift, stuck-at-zero, unit errors, etc.) versus true plume arrivals in groundwater monitoring records using physics-informed checks such as travel-time ordering and neighbor-well consistency. \\
+\tasknoterule
+\texttt{bridge\_\allowbreak{}gnss\_\allowbreak{}state\_\allowbreak{}forecast} & Process dirty bridge GNSS displacement time series (timestamp jitter, duplicates, spikes, drift) and produce cleaned reconstruction, state estimates, and short-term displacement forecasts. \\
+\tasknoterule
+\texttt{capecod\_\allowbreak{}plume\_\allowbreak{}reconstruction} & Reconstruct a multi-analyte groundwater plume from sparse monitoring wells: predict concentrations at withheld locations and times, compute plume metrics, and propose an optimal monitoring network under budget constraints. \\
+\tasknoterule
+\texttt{vsg\_\allowbreak{}stability\_\allowbreak{}parameter\_\allowbreak{}optimization} & Integrate current-limited Virtual Synchronous Generators into the IEEE 39-bus power system, generate transient stability data, build a physics-informed neural network, and train a reinforcement learning agent to optimize VSG parameters. \\
+\tasknoterule
+\texttt{cylinder\_\allowbreak{}wake\_\allowbreak{}prediction} & Implement a CPU-only 2D cylinder wake solver for the incompressible Navier-Stokes equations. Evaluated on unseen Reynolds numbers and domain configurations; scored on velocity-field accuracy, pressure-field accuracy, and flow-regime prediction. \\
+\tasknoterule
+\texttt{dabic\_\allowbreak{}gravity\_\allowbreak{}inversion} & Implement the D-ABIC regularization method for 3D gravity inversion within the SimPEG framework, run on both synthetic and real Vinton salt dome data under L0 and L1 sparse norms, and compare against a Hamiltonian Monte Carlo baseline. \\
+\tasknoterule
+\texttt{noisy\_\allowbreak{}product\_\allowbreak{}matching\_\allowbreak{}pipeline} & Determine whether pairs of product listings from different sources refer to the same real-world item, given noisy and incomplete attributes. Evaluated on hidden variants with different noise characteristics and data scales; no ground-truth labels are available during development. \\
+\tasknoterule
+\texttt{neural\_\allowbreak{}net\_\allowbreak{}weight\_\allowbreak{}recovery} & Reconstruct the correct layer ordering of a neural network from 97 shuffled weight files and input-output historical data, using dimensional constraints and reconstruction-error analysis. \\
+\tasknoterule
+\texttt{nanophotonic\_\allowbreak{}simulation\_\allowbreak{}reproduction} & Reproduce published nanophotonic simulation results (multi-source electromagnetic field distributions) from a research paper, implementing the solver from scratch using only NumPy. \\
+\tasknoterule
+\texttt{ftir\_\allowbreak{}polymer\_\allowbreak{}identification} & Identify polyimide monomers from FTIR spectra by correlating IR absorption peaks with functional groups, optionally aided by quantum chemistry simulations. Submission attempts are rate-limited to prevent brute-force enumeration. \\
+\tasknoterule
+\texttt{molecular\_\allowbreak{}property\_\allowbreak{}regression} & Predict molecular properties from graph representations without graph neural network libraries. Evaluated on multi-domain data with perturbations that penalize solutions overfitting to the development distribution. \\
+\tasknoterule
+\texttt{graph\_\allowbreak{}node\_\allowbreak{}classification} & Implement graph neural networks from scratch using only base PyTorch for semi-supervised node classification on an unseen graph under CPU-only constraints. \\
+\tasknoterule
+\texttt{gravitational\_\allowbreak{}wave\_\allowbreak{}signal\_\allowbreak{}detection} & Reproduce the LIGO GW150914 gravitational-wave detection pipeline: whitening, bandpass filtering, matched filtering against a numerical-relativity template, time-frequency analysis, and residual computation. \\
+\tasknoterule
+\texttt{herbal\_\allowbreak{}depression\_\allowbreak{}target\_\allowbreak{}screening} & Screen active components and protein targets for four traditional Chinese medicine herbs used in depression treatment, producing component lists, target mappings, disease-target intersections, and a PPI network visualization. \\
+\tasknoterule
+\texttt{polyimide\_\allowbreak{}homo\_\allowbreak{}lumo\_\allowbreak{}prediction} & Compute HOMO/LUMO energies of polyimide repeating units using DFT calculations, analyze substituent and conjugation effects on electronic properties, and identify the monomer pair with the widest band gap. \\
+\tasknoterule
+\texttt{industrial\_\allowbreak{}anomaly\_\allowbreak{}detection} & Detect anomalies in multivariate industrial sensor time series using only classical ML libraries. Evaluated on hidden variants including time-series crops, reversals, and normal-only segments to prevent hard-coding. \\
+\tasknoterule
+\texttt{bipedalwalker\_\allowbreak{}locomotion\_\allowbreak{}rl} & Train a CPU-only locomotion policy for BipedalWalker and its Hardcore variant. The judge evaluates only the submitted policy checkpoint, not the training process. Pre-trained policies and external RL libraries are prohibited. \\
+\tasknoterule
+\texttt{molecular\_\allowbreak{}solubility\_\allowbreak{}prediction} & Predict aqueous log-solubility from SMILES strings and molecular descriptors, improving upon a provided random forest baseline. Scored by prediction error on hidden test molecules. \\
+\tasknoterule
+\texttt{motor\_\allowbreak{}clutch\_\allowbreak{}model\_\allowbreak{}reproduction} & Implement a Gillespie/KMC stochastic simulation of the motor-clutch mechanotransduction model from sparse reference traces. Curve-fitting formulas and lookup tables are prohibited; the simulation must exhibit correct stochastic dynamics across unseen parameter combinations. \\
+\tasknoterule
+\texttt{streaming\_\allowbreak{}multilabel\_\allowbreak{}classification} & Implement streaming multi-label classification from scratch using only NumPy. Evaluated on subset accuracy, Hamming loss, and F1 metrics under CPU-only constraints. \\
+\tasknoterule
+\texttt{barnes\_\allowbreak{}hut\_\allowbreak{}nbody\_\allowbreak{}acceleration} & Implement a Barnes-Hut $N$-body gravitational simulation in C++17. Scored on both force accuracy relative to direct summation and speedup over a naive baseline across varying particle counts. \\
+\tasknoterule
+\texttt{blackbox\_\allowbreak{}numerical\_\allowbreak{}integration} & Integrate hidden black-box functions over the 10-dimensional unit hypercube via an oracle interface with bounded query budgets. Scored on accuracy relative to true integral values. \\
+\tasknoterule
+\texttt{pancreatic\_\allowbreak{}radiotherapy\_\allowbreak{}meta\_\allowbreak{}analysis} & Automate a two-stage systematic review pipeline: screen candidate PDFs and extract evidence, then perform inverse-variance meta-analysis with model selection and subgroup analysis. Evaluated on unseen publications. \\
+\tasknoterule
+\texttt{monge\_\allowbreak{}ampere\_\allowbreak{}pde\_\allowbreak{}solver} & Implement a numerical solver for the fully nonlinear Monge-Amp\`ere equation $\det(D^2 u) = f(x,y)$. Evaluated on unseen right-hand sides and boundary conditions; scored on solution accuracy and computational efficiency. \\
+\tasknoterule
+\texttt{pdf\_\allowbreak{}structured\_\allowbreak{}extraction} & Extract structured page blocks (text, tables, formulas, figures) with bounding boxes, reading order, and content from PDFs using only classical computer vision tools---no deep learning models. Evaluated on diverse enterprise document layouts. \\
+\tasknoterule
+\texttt{ocean\_\allowbreak{}mt\_\allowbreak{}lab\_\allowbreak{}inversion} & Implement 1D marine magnetotelluric forward modeling and Bayesian inversion with lateral coupling across ocean-bottom stations. Independent per-station or point-estimate-only solutions are penalized. \\
+\tasknoterule
+\texttt{pv\_\allowbreak{}power\_\allowbreak{}forecasting} & Forecast multi-site photovoltaic power generation from historical output and weather features. Evaluated on unseen data across multiple domain-specific metrics including ramp handling, peak accuracy, and multi-horizon performance. \\
+\tasknoterule
+\texttt{quantum\_\allowbreak{}architecture\_\allowbreak{}search} & Implement noise-adaptive quantum architecture search balancing classification accuracy and molecular ground-state energy estimation against hardware-realistic circuit depth and gate count constraints. \\
+\tasknoterule
+\texttt{collaborative\_\allowbreak{}filtering\_\allowbreak{}recommender} & Implement a top-K recommender system that jointly optimizes recommendation quality (NDCG) and runtime efficiency, including cold-start users with no training interactions. \\
+\tasknoterule
+\texttt{touchstone\_\allowbreak{}vna\_\allowbreak{}diagnostics} & Parse Touchstone S-parameter files in various representations (real-imaginary, magnitude-angle, dB-angle), compute derived RF metrics (return loss, VSWR, group delay, impedance), and produce structured diagnostic reports. \\
+\tasknoterule
+\texttt{ecg\_\allowbreak{}signal\_\allowbreak{}processing\_\allowbreak{}pipeline} & Implement a three-stage ECG processing pipeline (denoising, QRS complex detection, beat classification) from scratch using only NumPy. Evaluated on unseen recordings with different noise profiles and arrhythmia distributions. \\
+\tasknoterule
+\texttt{sketch\_\allowbreak{}solve\_\allowbreak{}least\_\allowbreak{}squares} & Solve large-scale overdetermined least-squares problems by choosing among direct solvers, iterative methods, and randomized sketching based on matrix properties. Scored on solution accuracy and speed across varied problem structures. \\
+\tasknoterule
+\texttt{substrate\_\allowbreak{}interface\_\allowbreak{}simulation} & Implement a coupled interface response simulation with correct parameter dependence. Hard-coded outputs are prohibited; evaluated on physical consistency, energy conservation, and statistical properties of stochastic trajectories. \\
+\tasknoterule
+\texttt{thermo\_\allowbreak{}fluid\_\allowbreak{}field\_\allowbreak{}prediction} & Predict 2D velocity and temperature fields for thermo-fluid coupling problems under varying boundary conditions and dimensionless parameters, using only NumPy on CPU. \\
+\tasknoterule
+\texttt{csi\_\allowbreak{}time\_\allowbreak{}series\_\allowbreak{}forecasting} & Forecast future wireless channel state information tensors from historical observations. Evaluated on unseen channel conditions and mobility scenarios under CPU-only constraints. \\
+\tasknoterule
+\texttt{roof\_\allowbreak{}damage\_\allowbreak{}active\_\allowbreak{}learning} & Design an active learning pipeline for satellite-imagery roof damage detection: start from a small labeled seed set, strategically query an oracle for additional labels under a fixed budget, and train an object detector for evaluation on unlabeled images. \\
+\BenchMidRule
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Combinatorial Optimization}} \\
+\BenchMidRule
+\texttt{ad\_\allowbreak{}placement\_\allowbreak{}optimization} & Partition a large integer grid into non-overlapping rectangles, each containing a designated anchor point, maximizing total satisfaction from how closely each rectangle's area matches its target. \\
+\tasknoterule
+\texttt{treant\_\allowbreak{}forest} & Strategically place obstacles in a grid maze to maximize the shortest-path length between start and goal, or block the path entirely. \\
+\tasknoterule
+\texttt{grid\_\allowbreak{}turing\_\allowbreak{}robot} & Design transition rules and initial coloring for a Turing-like robot on a colored grid to maximize the number of distinct cells visited while minimizing the rule set size. \\
+\tasknoterule
+\texttt{molecular\_\allowbreak{}self\_\allowbreak{}assembly} & Schedule bonding operations over discrete time steps to assemble atoms into a specified number of connected molecules, respecting spatial proximity and temporal ordering constraints. \\
+\tasknoterule
+\texttt{apple\_\allowbreak{}incremental\_\allowbreak{}game} & Decide each turn whether to invest in machines or collect output in an incremental production game, balancing short-term gains against long-horizon compounding. \\
+\tasknoterule
+\texttt{first\_\allowbreak{}order\_\allowbreak{}theorem\_\allowbreak{}prover} & Build a first-order automated theorem prover from scratch (parsing, clausification, unification, saturation) that produces verified proof or model witnesses. External provers and benchmark fingerprinting are forbidden. \\
+\tasknoterule
+\texttt{circuit\_\allowbreak{}layout\_\allowbreak{}optimization} & Implement a VLSI standard-cell placement solver minimizing half-perimeter wire length on industry-standard benchmarks. Scored on wire-length quality and runtime. \\
+\tasknoterule
+\texttt{order\_\allowbreak{}addition\_\allowbreak{}permutation\_\allowbreak{}optimization} & Find a permutation of 1,000 elements that minimizes a black-box cost function, using metaheuristic search (simulated annealing, genetic algorithms, local search) without access to the cost function's internals. \\
+\tasknoterule
+\texttt{equivalence\_\allowbreak{}class\_\allowbreak{}divide\_\allowbreak{}and\_\allowbreak{}conquer} & Solve six progressive competitive-programming problems centered on equivalence classes and divide-and-conquer, where techniques from earlier problems inform solutions to harder ones. \\
+\tasknoterule
+\texttt{jagua\_\allowbreak{}nesting\_\allowbreak{}optimization} & Improve a Rust-based 2D irregular bin packing optimizer for non-convex polygonal pieces. Solution geometry is independently verified; improvements below a minimum threshold receive no credit. \\
+\tasknoterule
+\texttt{sat\_\allowbreak{}solver} & Build a SAT solver from scratch implementing conflict-driven clause learning, watched literals, and restart strategies. External solvers and benchmark-aware heuristics are forbidden; scoring is balanced across difficulty tiers. \\
+\tasknoterule
+\texttt{smt\_\allowbreak{}solver} & Build an SMT solver from scratch for four quantifier-free theories (uninterpreted functions, linear real and integer arithmetic, and their combination). External SMT solvers are forbidden; model witnesses are independently validated. \\
+\tasknoterule
+\texttt{symbolic\_\allowbreak{}integration\_\allowbreak{}engine} & Extend a starter symbolic integration engine (with its own parser, simplifier, and differentiator) to handle a broader class of integrands. All computer algebra systems and numerical libraries are forbidden; correctness is verified by differentiating the returned antiderivative. \\
+\tasknoterule
+\texttt{tree\_\allowbreak{}block\_\allowbreak{}partitioning} & Solve six progressive problems on tree decomposition and block partitioning, where algorithmic ideas discovered in simpler variants transfer to harder ones. \\
+\tasknoterule
+\texttt{triangulation\_\allowbreak{}coloring\_\allowbreak{}optimization} & Minimize a cost function over a triangulation by jointly recoloring vertices and flipping edges, where the dominant term is a quadratic penalty on monochromatic (``ugly'') triangles. \\
+\tasknoterule
+\texttt{vibrating\_\allowbreak{}path\_\allowbreak{}graph\_\allowbreak{}coloring} & Color graph vertices and selectively remove edges to minimize a cost that penalizes both removed edges and monochromatic surviving edges. \\
+\tasknoterule
+\texttt{vehicle\_\allowbreak{}routing\_\allowbreak{}time\_\allowbreak{}windows} & Implement a capacitated vehicle routing solver with time windows for Solomon-style benchmarks. Scored against best-known solutions on vehicle count and total travel distance. \\
+\tasknoterule
+\texttt{warehouse\_\allowbreak{}forklift\_\allowbreak{}routing} & Route a forklift in a grid warehouse to receive goods arriving in random order, store them, and dispatch them in sequential order, minimizing total movement. \\
+\tasknoterule
+\texttt{wireless\_\allowbreak{}electricity\_\allowbreak{}layout} & Position wire segments on a 2D plane to deliver wireless electricity from two fixed source plates to thousands of cities, minimizing a quadratic cost over city-to-wire distances and wire displacements while avoiding short circuits. \\
+\BenchMidRule
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Formal Math \& Theorem Proving}} \\
+\BenchMidRule
+\texttt{lean\_\allowbreak{}analysis\_\allowbreak{}proofs} & Complete proof obligations across a multi-file Lean 4 project formalizing results in real and functional analysis. Proofs are checked transitively: a theorem counts only if its entire dependency chain is fully proved. \\
+\tasknoterule
+\texttt{carleson\_\allowbreak{}formalization} & Fill proof obligations in the Lean 4 formalization of Carleson's theorem on pointwise convergence of $L^2$ Fourier series. Transitive axiom checking ensures no dependence on unproved prerequisites. \\
+\tasknoterule
+\texttt{combinatorial\_\allowbreak{}games\_\allowbreak{}formalization} & Resolve proof obligations in a Lean 4 formalization of combinatorial game theory, covering surreal numbers, game arithmetic, and the Sprague-Grundy theorem. \\
+\tasknoterule
+\texttt{new\_\allowbreak{}foundations\_\allowbreak{}consistency} & Complete proof obligations in the ConNF Lean 4 project formalizing the consistency of Quine's New Foundations, involving permutation models and tangled type theory. \\
+\tasknoterule
+\texttt{cup\_\allowbreak{}product\_\allowbreak{}formalization} & Fill proof obligations in a Lean 4 formalization of the cup product in singular cohomology: cochain-level multiplication, the Leibniz rule, and the induced ring structure on cohomology groups. \\
+\tasknoterule
+\texttt{erdos392\_\allowbreak{}formalization} & Complete proof obligations for Erd\H{o}s Problem 392 (asymptotic prime distribution) within a Lean 4 analytic number theory project. Weighted scoring reflects relative difficulty of each proof. \\
+\tasknoterule
+\texttt{flt\_\allowbreak{}regular\_\allowbreak{}formalization} & Resolve proof obligations in a Lean 4 formalization of Fermat's Last Theorem for regular primes via Kummer's cyclotomic theory. Top-level results earn no credit unless foundational prerequisites are also fully proved. \\
+\tasknoterule
+\texttt{godel\_\allowbreak{}incompleteness\_\allowbreak{}formalization} & Complete proof obligations in a Lean 4 formalization of G\"{o}del's First Incompleteness Theorem, spanning G\"{o}del numbering, the fixed-point lemma, and the self-referential undecidable sentence. \\
+\tasknoterule
+\texttt{medium\_\allowbreak{}prime\_\allowbreak{}number\_\allowbreak{}theorem} & Complete proof obligations for the Prime Number Theorem with an explicit error term, requiring complex-analytic techniques including contour integration and zero-free regions of the Riemann zeta function. \\
+\tasknoterule
+\texttt{ordinal\_\allowbreak{}notation\_\allowbreak{}well\_\allowbreak{}foundedness} & Construct well-foundedness proofs for ordinal notation systems in Coq, involving Cantor Normal Form and ordinal arithmetic. \\
+\tasknoterule
+\texttt{pfr\_\allowbreak{}formalization} & Resolve proof obligations in the Lean 4 formalization of the Polynomial Freiman--Ruzsa conjecture (Gowers--Green--Manners--Tao 2023), involving Shannon entropy, Ruzsa distance, and subgroup covering arguments. \\
+\tasknoterule
+\texttt{sphere\_\allowbreak{}eversion\_\allowbreak{}formalization} & Complete proof obligations in a Lean 4 formalization of sphere eversion, spanning smooth immersions, jet bundles, ample differential relations, and convex integration. \\
+\tasknoterule
+\texttt{turing\_\allowbreak{}machine\_\allowbreak{}halting\_\allowbreak{}proofs} & Prove halting behavior for specific 6-state, 2-symbol Turing machines in Coq, contributing to the Busy Beaver frontier. Proofs must be mechanically verified with no admitted axioms. \\
+\BenchMidRule
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Professional Knowledge Work}} \\
+\BenchMidRule
+\texttt{portfolio\_\allowbreak{}risk\_\allowbreak{}calibration} & Implement a multi-module portfolio management system (risk calibration, constrained optimization, execution cost modeling, dynamic rebalancing) for a cross-asset ETF portfolio. Evaluated out-of-sample on risk-adjusted return metrics. \\
+\tasknoterule
+\texttt{storyboard\_\allowbreak{}ad\_\allowbreak{}copywriting} & Produce a promotional video script with dual variants and a shot-by-shot storyboard for a state-owned enterprise exhibition appearance, adhering to strict political communication standards and advertising compliance. \\
+\tasknoterule
+\texttt{brand\_\allowbreak{}annual\_\allowbreak{}planning\_\allowbreak{}ppt} & Produce a comprehensive annual brand management plan as a presentation deck and companion data tables for a mid-size IPTV company, covering strategy, monthly action roadmaps, budgets with market rate benchmarks, and competitive analysis. \\
+\tasknoterule
+\texttt{securities\_\allowbreak{}protection\_\allowbreak{}training} & Produce a complete set of training deliverables for a securities investor protection seminar: legal framework overview, core systems analysis, case studies, comparative study, policy analysis, presentation deck, lecture script, and bibliography. \\
+\tasknoterule
+\texttt{college\_\allowbreak{}english\_\allowbreak{}exam\_\allowbreak{}bank} & Produce five parallel examination papers with answer keys for a college English course, plus a blueprint table and an overlap self-check matrix ensuring cross-paper diversity meets pedagogical thresholds. \\
+\tasknoterule
+\texttt{cross\_\allowbreak{}border\_\allowbreak{}commission\_\allowbreak{}compliance} & Produce a multi-module legal compliance report for a cross-border commission payment, covering multi-jurisdictional anti-corruption risk (FCPA, UK Bribery Act, Chinese Criminal Law), export control, transfer pricing, and evidence preservation strategy. \\
+\tasknoterule
+\texttt{cross\_\allowbreak{}border\_\allowbreak{}investment\_\allowbreak{}ppt} & Produce a presentation covering 15 months of global cross-border investment policy developments with chronological policy inventory, original data charts, multi-sector industry analysis with deal case studies, and forward-looking risk assessment. \\
+\tasknoterule
+\texttt{cta\_\allowbreak{}risk\_\allowbreak{}budget\_\allowbreak{}optimization} & Build a complete CTA multi-strategy futures trading system: multiple signal classes, dynamic risk budgeting, a multi-currency backtest engine with transaction costs, drawdown control, and performance attribution. \\
+\tasknoterule
+\texttt{equity\_\allowbreak{}objection\_\allowbreak{}report} & Produce a court-submission-ready legal research report analyzing whether beneficial owners under equity proxy-holding arrangements can defeat forced execution in Chinese civil enforcement law, citing specific judicial guidance and case precedents. \\
+\tasknoterule
+\texttt{expo\_\allowbreak{}visitor\_\allowbreak{}conversion\_\allowbreak{}model} & Clean tens of thousands of messy visitor registration records (entity resolution, address parsing, company-name merging), tag professional visitors, and build a calibrated exhibitor conversion scoring model. \\
+\tasknoterule
+\texttt{factor\_\allowbreak{}stock\_\allowbreak{}model\_\allowbreak{}optimization} & Implement an adaptive multi-factor stock selection model with IC-based factor selection, dynamic weighting, industry/market-cap neutralization, and constrained portfolio construction. Evaluated out-of-sample on information ratio, excess return, drawdown, and turnover. \\
+\tasknoterule
+\texttt{global\_\allowbreak{}terrorism\_\allowbreak{}atlas\_\allowbreak{}report} & Transform a 200K+ record terrorism database into a single-PDF infographic atlas with maps, ranking charts, shaped word clouds, a sunburst diagram, and country-level fatality trends. \\
+\tasknoterule
+\texttt{hebei\_\allowbreak{}gaokao\_\allowbreak{}strategy\_\allowbreak{}report} & Produce a multi-tier college admission preference plan with alternative strategies, given complex personal constraints (banned fields, health disqualifications, career priorities) and three years of historical admission data. \\
+\tasknoterule
+\texttt{hk\_\allowbreak{}connect\_\allowbreak{}annual\_\allowbreak{}metrics} & Programmatically retrieve and populate financial metrics for 255 Hong Kong Stock Connect-eligible securities from annual reports and market data providers. Scored on per-cell accuracy. \\
+\tasknoterule
+\texttt{k12\_\allowbreak{}math\_\allowbreak{}recommendation} & Build a knowledge-tracing and question-recommendation system from hundreds of thousands of student interaction records, evaluated on prediction accuracy, mastery calibration, learning gain, and pedagogical constraint satisfaction. \\
+\tasknoterule
+\texttt{property\_\allowbreak{}actuarial\_\allowbreak{}pricing} & Build an actuarial pricing model for SME property insurance: loss modeling, risk grading, reinsurance cost allocation, and premium smoothing with renewal constraints. Evaluated on predictive accuracy and premium adequacy. \\
+\tasknoterule
+\texttt{real\_\allowbreak{}estate\_\allowbreak{}bid\_\allowbreak{}estimate} & Conduct feasibility analysis for a supertall office land tender: market research, quarterly cash flow models under two bidding structures, sensitivity analysis, and a reasoned investment recommendation. \\
+\tasknoterule
+\texttt{stock\_\allowbreak{}momentum\_\allowbreak{}backtest} & Fetch live A-share market data, compute risk-adjusted momentum scores, apply multi-factor screening filters, and calculate a market-cap-weighted portfolio return for a specific holding period. Scored on numerical accuracy of each computation step. \\
+\tasknoterule
+\texttt{storm\_\allowbreak{}claim\_\allowbreak{}ring\_\allowbreak{}audit} & Build a fraud detection pipeline for post-disaster insurance claims: produce hold/release/escalate decisions and fraud-ring cluster assignments from interconnected claim, payment, survey, and media datasets, distinguishing genuine disaster patterns from coordinated fraud. \\
+\BenchMidRule
+\multicolumn{2}{@{}l}{\rule{0pt}{1.2em}\textsc{\scriptsize Interactive Games \& Simulators}} \\
+\BenchMidRule
+\texttt{dcss\_\allowbreak{}dungeon\_\allowbreak{}ai} & Write a Lua bot for Dungeon Crawl Stone Soup that autonomously explores, fights, and descends dungeon levels as a Minotaur Berserker under a wall-clock time budget. Scored by mean in-game score across multiple runs. \\
+\tasknoterule
+\texttt{anchorhead\_\allowbreak{}text\_\allowbreak{}adventure} & Play the Lovecraftian interactive fiction game \emph{Anchorhead} via an HTTP API, sending text commands and receiving prose observations. Scored by peak in-game score, reflecting progression through the multi-day narrative and puzzle chain. \\
+\tasknoterule
+\texttt{trinity\_\allowbreak{}text\_\allowbreak{}adventure} & Play Infocom's \emph{Trinity} via an HTTP game API. The game requires precise object manipulation and understanding of symbolic and temporal clues across interconnected zones. \\
+\tasknoterule
+\texttt{tryst\_\allowbreak{}text\_\allowbreak{}adventure} & Play \emph{Tryst of Fate} via an HTTP game API. The branching narrative with irreversible choices requires strategic exploration to reach high-scoring endings. \\
+\tasknoterule
+\texttt{nethack\_\allowbreak{}dungeon\_\allowbreak{}agent} & Implement a decision policy for NetHack via the NLE harness, parsing ASCII map observations and stat vectors to navigate, fight, and survive across multiple procedurally generated runs. \\
+\tasknoterule
+\texttt{openrct2\_\allowbreak{}theme\_\allowbreak{}park\_\allowbreak{}ai} & Write a JavaScript plugin for OpenRCT2 that autonomously builds rides, hires staff, sets pricing, and grows park company value across multiple scenarios of increasing complexity. \\
+\tasknoterule
+\texttt{openttd\_\allowbreak{}transport\_\allowbreak{}ai} & Write an AI script for OpenTTD that builds road, rail, and air transport networks to connect towns and industries and grow company value across diverse procedurally generated maps. \\
+\tasknoterule
+\texttt{wesnoth\_\allowbreak{}tactical\_\allowbreak{}ai} & Write tactical AI logic for Battle for Wesnoth that defeats the built-in AI through custom recruitment, focus-fire targeting, terrain exploitation, and village-capture timing across multiple maps. \\
+\end{longtable}
+\endgroup

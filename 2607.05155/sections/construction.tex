@@ -1,0 +1,22 @@
+\section{Evaluation Harness}
+\label{sec:construction}
+\label{sec:harness}
+
+A standard unit-test harness is not enough for day-long runs. The benchmark must hide evaluation assets, support repeated submissions over many hours, measure progress even when agents do not explicitly submit, and run reliably on both local machines and clusters. We built \textbf{SForge} around three mechanisms: isolated work and judge environments, a feedback loop modeled on online judges, and progress tracking on the host.
+
+\paragraph{Two-container architecture.}
+Each task is materialized as two task-specific Docker images:
+\begin{itemize}
+    \item The \textbf{work image} contains the skeleton codebase, documentation, and local validation tools, but no hidden evaluation assets. The agent operates only in this environment.
+    \item The \textbf{judge image} contains the hidden evaluation assets, grading scripts, and evaluation commands. It is never exposed to the agent.
+\end{itemize}
+At evaluation time, the agent's code is copied into an ephemeral judge container, which runs the hidden tests, returns only task-defined structured feedback, and is then destroyed. This separation prevents agents from inspecting or modifying the hidden grader while still allowing realistic iterative development.
+
+\paragraph{Judge server and the outer loop.}
+The outer loop is mediated by a host-side HTTP judge server. The agent submits its current solution to the server, which queues the submission, runs the judge container, parses the result, and returns feedback such as pass rate, score, per-test verdicts, or diagnostics. For long-running evaluations, the server supports asynchronous grading, allowing agents to continue working while submitted jobs are being judged. The server also enforces submission budgets, cooldown intervals, and session authentication.
+
+\paragraph{Long-horizon execution and measurement.}
+SForge combines host-side auto-eval with stop-hook and auto-resume mechanisms to support day-scale runs. Auto-eval periodically snapshots and evaluates the agent workspace through a privileged channel; these results are recorded for trajectory analysis but are not shown to the agent. The stop hook and auto-resume mechanism reduce premature truncation from voluntary exits, crashes, context limits, or transient API failures.
+
+\paragraph{Operational support and safeguards.}
+SForge also provides practical infrastructure for running and auditing large-scale experiments. A web dashboard records score trajectories, submission histories, diffs, and conversation traces for live monitoring and post-hoc comparison. The same task specification can run on either a local Docker backend or a Kubernetes backend for cluster-scale evaluation. To preserve benchmark integrity, SForge combines work--judge isolation with submission filtering, network isolation, and session-scoped authentication, so agents can receive feedback without access to hidden tests, privileged history, or auto-eval results. Appendix~\ref{sec:appendix-evaluation-hacking} describes task-design failure modes we observed during benchmark development and the corresponding mitigations.

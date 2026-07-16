@@ -1,0 +1,50 @@
+\subsection{Gravitational-Wave Case Study Details}
+\label{sec:appendix-gw-case-study-details}
+
+\textbf{The selected milestones compress the run into interpretable phase transitions.} Table~\ref{tab:gw-case-study-stages} summarizes the main phases behind the selected milestones rather than every submission. The first selected milestone already passes the protocol and entrypoint checks, generates all five required CSV files on the canonical grids, and obtains a score of 42.8. A subsequent key update raises the score to 47.1, mainly by improving the source dynamics. Around hour 1, another milestone reaches roughly 50 as the agent improves the H1/L1 spectrograms and early H1 alignment in the time domain. These gains reflect standard signal processing: filtering, normalization, windowing in the time-frequency plane, interpolation to the canonical grid, and cropping around the event.
+
+\textbf{The largest score gain comes from the high-weight source-dynamics component.} The largest jump occurs around hours 4--5: the overall score rises from about 52.3 to 59.7, driven almost entirely by the source dynamics subscore (64.2 to 89.0). Because this subtask carries the largest weight, a compact physical model plus calibration produces a large total-score gain. After that point, the agent shifts to H1 waveform tuning, where the H1 time-series subscore climbs from roughly 47 to 95 by the end.
+
+\textbf{The final solution is strong on H1 waveform and source dynamics, but it still leaves room to improve toward a human-standard LIGO-style analysis.} Table~\ref{tab:gw-case-study-subscores} breaks down the final score. GPT-5.5 scores high on H1 waveform reconstruction and the source dynamics but remains weak on the spectrograms and L1 reconstruction. Empirical calibration and parameter search produce a substantial score, but they do not replace a coherent end-to-end pipeline for strain preprocessing, whitening, time-frequency analysis, and waveform alignment across detectors.
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lclp{0.46\linewidth}}
+\BenchTopRule
+Stage & Time & Best score & Main improvement \\
+\BenchMidRule
+Initial milestones & 0h & 42.8--47.1 & Built a reconstruction pipeline that can be evaluated; replacing a noisy frequency estimate improved the inferred source motion from 51 to 64 (\textbf{+13 pp.}) \\
+Early signal processing & 1--4h & 52.3 & Recentered the time-frequency window on the merger; the Hanford detector waveform and both detector spectrograms improved together, raising the best score from 47.1 to 52.3 (\textbf{+5.2 pp.}) \\
+Main breakthrough & 4--5h & 59.7 & Calibrated the binary-source model; the orbital velocity and separation score jumped from 64 to 89 (\textbf{+25 pp.}) \\
+Late waveform tuning & 5--11.5h & 66.9 & Found the remaining mismatch in the Hanford detector waveform; time-shift alignment and error fitting raised Hanford from 47 to 95 (\textbf{+48 pp.}) \\
+Final refinement & 12h & 67.0 & Consolidated final corrections for the Hanford and Livingston detectors; a small Livingston waveform gain raised the aggregate score from 66.9 to 67.0 (\textbf{+0.1 pp.}) \\
+\BenchBottomRule
+\end{tabular}
+\caption{Main phases in the gravitational-wave evolving trajectory. The trajectory shows how the agent refines signal processing, source dynamics, and per-detector waveform reconstruction over the 12-hour run.}
+\label{tab:gw-case-study-stages}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lr}
+\BenchTopRule
+Component & Final subscore \\
+\BenchMidRule
+H1 time series & 95.0 \\
+L1 time series & 57.1 \\
+H1 spectrogram & 42.7 \\
+L1 spectrogram & 44.7 \\
+Velocity/separation & 89.0 \\
+\BenchMidRule
+Aggregate score & 67.0 \\
+\BenchBottomRule
+\end{tabular}
+\caption{Final subscore composition for the GPT-5.5 gravitational-wave 12h run.}
+\label{tab:gw-case-study-subscores}
+\end{table}

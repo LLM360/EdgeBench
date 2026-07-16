@@ -1,0 +1,26 @@
+\providecommand{\NA}{\textemdash}
+\providecommand{\best}[1]{}
+\renewcommand{\best}[1]{\begingroup\bfseries\boldmath #1\endgroup}
+\providecommand{\second}[1]{}
+\renewcommand{\second}[1]{\underline{#1}}
+\begin{table*}[t!]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}l*{6}{c}!{\hspace{5pt}\vrule width 0.45pt\hspace{5pt}}*{6}{c}@{}}
+\BenchTopRule
+\multirow{2}{*}{\textbf{Model}} & \multicolumn{6}{c!{\hspace{5pt}\vrule width 0.45pt\hspace{5pt}}}{\textbf{Overall Score} $\uparrow$} & \multicolumn{6}{c}{\textbf{Category Score@12h} $\uparrow$} \\
+\BenchCMidRule{2-13}
+ & @2h & @4h & @6h & @8h & @10h & \textbf{@12h} & Science & Code & Optimize & Knowledge & Math & Games \\
+\BenchMidRule
+Opus 4.8 & \best{39.0} & \best{45.7} & \best{48.1} & \best{49.8} & \best{50.9} & \best{51.3} & \best{48.5} & \best{67.4} & \best{36.5} & \best{47.0} & \best{55.0} & \best{39.3} \\
+GPT-5.5 & \second{36.8} & \second{42.1} & \second{44.5} & \second{46.3} & \second{47.6} & \second{48.4} & \second{44.3} & \second{65.0} & \second{33.6} & \second{45.7} & \second{50.0} & \second{39.1} \\
+GPT-5.4 & 29.7 & 34.0 & 36.5 & 38.0 & 38.9 & 39.3 & 33.5 & 54.1 & 27.9 & 38.8 & 40.8 & 29.0 \\
+GLM-5.1 & 26.0 & 30.4 & 32.9 & 34.9 & 36.5 & 37.4 & 33.8 & 50.9 & 26.4 & 43.5 & 24.6 & 29.3 \\
+DS-V4-Pro & 23.3 & 27.1 & 29.0 & 29.9 & 30.9 & 31.0 & 30.0 & 43.0 & 21.5 & 37.0 & 14.1 & 16.9 \\
+\BenchBottomRule
+\end{tabular}
+\caption{Aggregate leaderboard. Overall scores are reported at each time budget, while category scores are reported at the 12-hour budget. Bold marks the best value in each score column and underlining marks the second-best value.}
+\label{tab:aggregate_score_table}
+\end{table*}

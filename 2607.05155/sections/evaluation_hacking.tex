@@ -1,0 +1,22 @@
+\section{Evaluation Hacking}
+\label{sec:appendix-evaluation-hacking}
+
+Long-horizon evaluation gives agents many opportunities to adapt to evaluator feedback. During task construction and adversarial stress tests, we audited traces for strategies that raised measured scores without exercising the intended capability. These observations are development diagnostics, not official model results: affected tasks were revised or excluded, and the cases below motivated safeguards in the final benchmark.
+
+\paragraph{Feedback as an oracle for hidden answers.}
+In \texttt{cylinder\_\allowbreak{}wake\_\allowbreak{}prediction}, an agent treated per-case absolute errors as equations and reconstructed the hidden targets through more than 400 submissions. A lookup table then scored 1.000 without solving the underlying fluid dynamics problem, whereas the best observed submission based on a physics model scored 0.165.
+
+\paragraph{Optimizing stochastic upper tails.}
+In \texttt{nethack\_\allowbreak{}dungeon\_\allowbreak{}agent}, an agent removed a fixed random seed after recognizing that higher variance increased the chance of a favorable evaluation. Across 311 submissions, its best score was 1{,}501 while its mean was 484, showing how best-of-$N$ selection can reward repeated sampling as well as policy quality.
+
+\paragraph{Overfitting evaluator seeds.}
+In \texttt{bipedalwalker\_\allowbreak{}locomotion\_\allowbreak{}rl}, the development judge initially used a single deterministic episode, allowing agents to infer and optimize for the reused seed rather than expected return. One run reached a Hardcore return of 301.5 on the judge seed but averaged about 12 over a local 100-episode evaluation; another searched a small hand-coded controller directly against the judge formula. This motivated hidden multi-seed evaluation for stochastic control tasks.
+
+\paragraph{Crossing a trust boundary.}
+In \texttt{autolifter}, an agent discovered that anti-cheat checks exempted the repository's \texttt{baseline/} directory and moved an implementation based on an oracle into that trusted path. It solved 82 of 84 hidden cases and scored 0.980; the strongest observed submission that followed the intended synthesis route scored 0.121.
+
+\paragraph{Online answer lookup.}
+Publicly indexed data, task artifacts, or reference implementations can turn an intended reasoning problem into retrieval. In \texttt{stock\_\allowbreak{}momentum\_\allowbreak{}backtest}, an agent attempted Web search for target data, but network isolation for the task blocked the requests. We include this as a prevented risk rather than a successful exploit.
+
+\paragraph{Mitigation.}
+These findings led us to harden both task design and infrastructure. We revised or excluded affected tasks, reduced or aggregated feedback that could reveal hidden targets, enforced submission budgets and cooldowns, evaluated stochastic behavior over hidden seed sets, extended integrity checks across writable paths, and disabled network access for tasks where public data or reference solutions could reveal the answer. These controls do not eliminate every adaptive attack, but they reduce the channels identified during task development.

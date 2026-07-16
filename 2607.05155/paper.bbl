@@ -1,0 +1,603 @@
+\begin{thebibliography}{82}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abbott et~al.(2016)]{abbott2016observation}
+B.~P. Abbott et~al.
+\newblock Observation of gravitational waves from a binary black hole merger.
+\newblock \emph{Physical Review Letters}, 116\penalty0 (6):\penalty0 061102,
+  2016.
+\newblock \doi{10.1103/PhysRevLett.116.061102}.
+
+\bibitem[Anthropic(2024)]{anthropic2024claude35}
+Anthropic.
+\newblock {The Claude Model Family}.
+\newblock
+  \url{https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.5_Addendum.pdf},
+  2024.
+
+\bibitem[{Anthropic}(2026)]{anthropic2026claudeopus48systemcard}
+{Anthropic}.
+\newblock {Claude Opus 4.8 System Card}.
+\newblock
+  \url{https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf},
+  May 2026.
+\newblock System card. Released May 28, 2026; updated June 3, 2026.
+
+\bibitem[Asawa et~al.(2026)Asawa, Glaze, Orlanski, Ramakrishnan, Xu,
+  et~al.]{asawa2026clbench}
+Parth Asawa, Christopher~M. Glaze, Gabriel Orlanski, Ramya Ramakrishnan, Benji
+  Xu, et~al.
+\newblock Continual learning bench: Evaluating frontier {AI} systems in
+  real-world stateful environments.
+\newblock \emph{arXiv preprint arXiv:2606.05661}, 2026.
+
+\bibitem[Bak et~al.(1987)Bak, Tang, and Wiesenfeld]{bak1987self}
+Per Bak, Chao Tang, and Kurt Wiesenfeld.
+\newblock Self-organized criticality: An explanation of 1/f noise.
+\newblock \emph{Physical Review Letters}, 59\penalty0 (4):\penalty0 381--384,
+  1987.
+
+\bibitem[Berkson(1944)]{berkson1944application}
+Joseph Berkson.
+\newblock Application of the logistic function to bio-assay.
+\newblock \emph{Journal of the American Statistical Association}, 39\penalty0
+  (227):\penalty0 357--365, 1944.
+\newblock \doi{10.1080/01621459.1944.10500699}.
+
+\bibitem[Bhagia et~al.(2024)Bhagia, Liu, Wettig, Heineman, Tafjord, Jha,
+  Soldaini, Smith, Groeneveld, Koh, Dodge, and
+  Hajishirzi]{bhagia2024taskscaling}
+Akshita Bhagia, Jiacheng Liu, Alexander Wettig, David Heineman, Oyvind Tafjord,
+  Ananya~Harsh Jha, Luca Soldaini, Noah~A. Smith, Dirk Groeneveld, Pang~Wei
+  Koh, Jesse Dodge, and Hannaneh Hajishirzi.
+\newblock Establishing task scaling laws via compute-efficient model ladders.
+\newblock \emph{arXiv preprint arXiv:2412.04403}, 2024.
+
+\bibitem[Bliss(1934)]{bliss1934method}
+Chester~I. Bliss.
+\newblock The method of probits.
+\newblock \emph{Science}, 79\penalty0 (2037):\penalty0 38--39, 1934.
+
+\bibitem[Brown et~al.(2024)Brown, Juravsky, Ehrlich, Clark, Le, R{\'e}, and
+  Mirhoseini]{brown2024largelanguagemonkeys}
+Bradley Brown, Jordan Juravsky, Ryan Ehrlich, Ronald Clark, Quoc~V. Le,
+  Christopher R{\'e}, and Azalia Mirhoseini.
+\newblock Large language monkeys: Scaling inference compute with repeated
+  sampling.
+\newblock \emph{arXiv preprint arXiv:2407.21787}, 2024.
+
+\bibitem[Chan et~al.(2025)Chan, Chowdhury, Jaffe, Aung, Sherburn, Mays,
+  Starace, Liu, Maksin, Patwardhan, Weng, and M{\k{a}}dry]{chan2024mlebench}
+Jun~Shern Chan, Neil Chowdhury, Oliver Jaffe, James Aung, Dane Sherburn, Evan
+  Mays, Giulio Starace, Kevin Liu, Leon Maksin, Tejal Patwardhan, Lilian Weng,
+  and Aleksander M{\k{a}}dry.
+\newblock {MLE}-bench: Evaluating machine learning agents on machine learning
+  engineering.
+\newblock In \emph{The Thirteenth International Conference on Learning
+  Representations}, 2025.
+
+\bibitem[Chen et~al.(2021)Chen, Tworek, Jun, Yuan, de~Oliveira~Pinto, Kaplan,
+  Edwards, Burda, Joseph, Brockman, et~al.]{chen2021humaneval}
+Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique~Ponde
+  de~Oliveira~Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph,
+  Greg Brockman, et~al.
+\newblock Evaluating large language models trained on code.
+\newblock \emph{arXiv preprint arXiv:2107.03374}, 2021.
+
+\bibitem[Chen et~al.(2025)Chen, Chen, Ning, Zhang, Wang, Yu, Li, Liao, Wei, Lu,
+  et~al.]{chen2024scienceagentbench}
+Ziru Chen, Shijie Chen, Yuting Ning, Qianheng Zhang, Boshi Wang, Botao Yu,
+  Yifei Li, Zeyi Liao, Chen Wei, Zitong Lu, et~al.
+\newblock {ScienceAgentBench}: Toward rigorous assessment of language agents
+  for data-driven scientific discovery.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
+
+\bibitem[Cheng et~al.(2023)Cheng, Kolobov, Misra, Nie, and
+  Swaminathan]{cheng2023llfbench}
+Ching-An Cheng, Andrey Kolobov, Dipendra Misra, Allen Nie, and Adith
+  Swaminathan.
+\newblock {LLF}-bench: Benchmark for interactive learning from language
+  feedback.
+\newblock \emph{arXiv preprint arXiv:2312.06853}, 2023.
+
+\bibitem[Chi et~al.(2026)Chi, Hong, Jiang, Luo, Yang, Zhang,
+  et~al.]{chi2026frontiereng}
+Yizhe Chi, Deyao Hong, Dapeng Jiang, Tianwei Luo, Kaisen Yang, Boshi Zhang,
+  et~al.
+\newblock {Frontier-Eng}: Benchmarking self-evolving agents on real-world
+  engineering tasks with generative optimization.
+\newblock \emph{arXiv preprint arXiv:2604.12290}, 2026.
+
+\bibitem[Chu et~al.(2026)Chu, Agarwal, Thangamuthu, Graham, and
+  Mattern]{chu2026frontierswe}
+Evan Chu, Rajan Agarwal, Abishek Thangamuthu, Brendan Graham, and Justus
+  Mattern.
+\newblock {FrontierSWE}: Benchmarking coding agents at the limits of human
+  abilities.
+\newblock \url{https://www.frontierswe.com/blog}, 2026.
+
+\bibitem[{DeepSeek-AI}(2025)]{deepseekai2025deepseekr1}
+{DeepSeek-AI}.
+\newblock {DeepSeek-R1}: Incentivizing reasoning capability in {LLMs} via
+  reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2501.12948}, 2025.
+
+\bibitem[{DeepSeek-AI}(2026)]{deepseekai2026deepseekv4}
+{DeepSeek-AI}.
+\newblock {DeepSeek-V4}: Towards highly efficient million-token context
+  intelligence.
+\newblock
+  \url{https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf},
+  April 2026.
+\newblock Technical report.
+
+\bibitem[Ding et~al.(2025)Ding, Long, Pu, et~al.]{ding2025nl2repobench}
+Jingzhe Ding, Shengda Long, Changxin Pu, et~al.
+\newblock {NL2Repo-Bench}: Towards long-horizon repository generation
+  evaluation of coding agents.
+\newblock \emph{arXiv preprint arXiv:2512.12730}, 2025.
+
+\bibitem[Dou et~al.(2025)Dou, Zhang, Huang, Chen, Chen, Liu, Liu, Liu, Zhong,
+  Zhang, et~al.]{dou2025evalearn}
+Shihan Dou, Ming Zhang, Chenhao Huang, Jiayi Chen, Feng Chen, Shichun Liu, Yan
+  Liu, Chenxiao Liu, Cheng Zhong, Zongzhang Zhang, et~al.
+\newblock {EvaLearn}: Quantifying the learning capability and efficiency of
+  {LLMs} via sequential problem solving.
+\newblock \emph{arXiv preprint arXiv:2506.02672}, 2025.
+
+\bibitem[Dou et~al.(2026{\natexlab{a}})Dou, Shen, Huang, Ye, Chen, Wang, He,
+  Liu, Lv, Lin, et~al.]{dou2026clbenchlife}
+Shihan Dou, Yujiong Shen, Chenhao Huang, Junjie Ye, Jiayi Chen, Junzhe Wang,
+  Qianyu He, Shichun Liu, Changze Lv, Jiahang Lin, et~al.
+\newblock {CL-bench Life}: Can language models learn from real-life context?
+\newblock \emph{arXiv preprint arXiv:2604.27043}, 2026{\natexlab{a}}.
+
+\bibitem[Dou et~al.(2026{\natexlab{b}})Dou, Zhang, Yin, Huang, Shen, Wang,
+  Chen, Ni, Ye, Zhang, et~al.]{dou2026clbench}
+Shihan Dou, Ming Zhang, Zhangyue Yin, Chenhao Huang, Yujiong Shen, Junzhe Wang,
+  Jiayi Chen, Yuchen Ni, Junjie Ye, Cheng Zhang, et~al.
+\newblock {CL-bench}: A benchmark for context learning.
+\newblock \emph{arXiv preprint arXiv:2602.03587}, 2026{\natexlab{b}}.
+
+\bibitem[Dubey et~al.(2024)Dubey, Jauhri, Pandey, Kadian, Al-Dahle, Letman,
+  Mathur, Schelten, Yang, Fan, et~al.]{dubey2024llama3}
+Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad
+  Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan,
+  et~al.
+\newblock The {Llama} 3 herd of models.
+\newblock \emph{arXiv preprint arXiv:2407.21783}, 2024.
+
+\bibitem[Faroughy et~al.(2026)Faroughy, Schweitzer, Pang, Mishra-Sharma, and
+  Shih]{faroughy2026colliderbench}
+Darius~A. Faroughy, Sofia~Palacios Schweitzer, Ian Pang, Siddharth
+  Mishra-Sharma, and David Shih.
+\newblock {Collider-Bench}: Benchmarking {AI} agents with particle physics
+  analysis reproduction.
+\newblock \emph{arXiv preprint arXiv:2605.13950}, 2026.
+
+\bibitem[{Gemini Team}(2024)]{geminiteam2024gemini15}
+{Gemini Team}.
+\newblock Gemini 1.5: Unlocking multimodal understanding across millions of
+  tokens of context.
+\newblock \emph{arXiv preprint arXiv:2403.05530}, 2024.
+
+\bibitem[{Gemini Team}(2025)]{geminiteam2025gemini25}
+{Gemini Team}.
+\newblock Gemini 2.5: Pushing the frontier with advanced reasoning,
+  multimodality, long context, and next generation agentic capabilities.
+\newblock \emph{arXiv preprint arXiv:2507.06261}, 2025.
+
+\bibitem[{GLM-5 Team}(2026)]{glm5team2026glm5report}
+{GLM-5 Team}.
+\newblock {GLM-5}: from vibe coding to agentic engineering.
+\newblock \url{https://arxiv.org/abs/2602.15763}, 2026.
+
+\bibitem[Gompertz(1825)]{gompertz1825nature}
+Benjamin Gompertz.
+\newblock On the nature of the function expressive of the law of human
+  mortality, and on a new mode of determining the value of life contingencies.
+\newblock \emph{Philosophical Transactions of the Royal Society of London},
+  115:\penalty0 513--583, 1825.
+
+\bibitem[Hendrycks et~al.(2021{\natexlab{a}})Hendrycks, Burns, Basart, Zou,
+  Mazeika, Song, and Steinhardt]{hendrycks2021mmlu}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+  Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In \emph{International Conference on Learning Representations},
+  2021{\natexlab{a}}.
+
+\bibitem[Hendrycks et~al.(2021{\natexlab{b}})Hendrycks, Burns, Kadavath, Arora,
+  Basart, Tang, Song, and Steinhardt]{hendrycks2021math}
+Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric
+  Tang, Dawn Song, and Jacob Steinhardt.
+\newblock Measuring mathematical problem solving with the {MATH} dataset.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  2021{\natexlab{b}}.
+
+\bibitem[Hilton et~al.(2023)Hilton, Tang, and Schulman]{hilton2023rlscaling}
+Jacob Hilton, Jie Tang, and John Schulman.
+\newblock Scaling laws for single-agent reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2301.13442}, 2023.
+
+\bibitem[Hoffmann et~al.(2022)Hoffmann, Borgeaud, Mensch, Buchatskaya, Cai,
+  Rutherford, de~Las~Casas, Hendricks, Welbl, Clark,
+  et~al.]{hoffmann2022training}
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor
+  Cai, Eliza Rutherford, Diego de~Las~Casas, Lisa~Anne Hendricks, Johannes
+  Welbl, Aidan Clark, et~al.
+\newblock Training compute-optimal large language models.
+\newblock \emph{arXiv preprint arXiv:2203.15556}, 2022.
+
+\bibitem[Huntley(2026)]{huntley2026ralphloop}
+Geoffrey Huntley.
+\newblock {Everything Is a Ralph Loop}.
+\newblock \url{https://ghuntley.com/loop/}, January 2026.
+\newblock Blog post, January 17, 2026.
+
+\bibitem[Imajuku et~al.(2025)Imajuku, Horie, Iwata, Aoki, Takahashi, and
+  Akiba]{imajuku2025alebench}
+Yuki Imajuku, Kohki Horie, Yoichi Iwata, Kensho Aoki, Naohiro Takahashi, and
+  Takuya Akiba.
+\newblock {ALE}-bench: A benchmark for long-horizon objective-driven algorithm
+  engineering.
+\newblock \emph{arXiv preprint arXiv:2506.09050}, 2025.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, and Karthik~R. Narasimhan.
+\newblock {SWE}-bench: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations}, 2024.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei]{kaplan2020scaling}
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom~B. Brown, Benjamin Chess, Rewon
+  Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv preprint arXiv:2001.08361}, 2020.
+
+\bibitem[Khatri et~al.(2025)Khatri, Madaan, Tiwari, Bansal, Duvvuri, Zaheer,
+  Dhillon, Brandfonbrener, and Agarwal]{khatri2025scalingrlcompute}
+Devvrit Khatri, Lovish Madaan, Rishabh Tiwari, Rachit Bansal, Sai~Surya
+  Duvvuri, Manzil Zaheer, Inderjit~S. Dhillon, David Brandfonbrener, and
+  Rishabh Agarwal.
+\newblock The art of scaling reinforcement learning compute for {LLMs}.
+\newblock \emph{arXiv preprint arXiv:2510.13786}, 2025.
+
+\bibitem[Kwa et~al.(2025)Kwa, West, Becker, Deng, Garcia, Hasin, Jawhar,
+  Kinniment, Rush, Arx, et~al.]{kwa2025timehorizon}
+Thomas Kwa, Ben West, Joel Becker, Amy Deng, Katharyn Garcia, Max Hasin, Sami
+  Jawhar, Megan Kinniment, Nate Rush, Sydney~Von Arx, et~al.
+\newblock Measuring {AI} ability to complete long tasks.
+\newblock \emph{arXiv preprint arXiv:2503.14499}, 2025.
+
+\bibitem[Li et~al.(2022)Li, Choi, Chung, Kushman, Schrittwieser, Leblond,
+  Eccles, Keeling, Gimeno, Lago, Hubert, Choy, de~Masson~d'Autume, Babuschkin,
+  Chen, Huang, Welbl, Gowal, Cherepanov, Molloy, Mankowitz, Robson, Kohli,
+  de~Freitas, Kavukcuoglu, and Vinyals]{li2022alphacode}
+Yujia Li, David Choi, Junyoung Chung, Nate Kushman, Julian Schrittwieser,
+  R{\'e}mi Leblond, Tom Eccles, James Keeling, Felix Gimeno, Agustin~Dal Lago,
+  Thomas Hubert, Peter Choy, Cyprien de~Masson~d'Autume, Igor Babuschkin,
+  Xinyun Chen, Po-Sen Huang, Johannes Welbl, Sven Gowal, Alexey Cherepanov,
+  James Molloy, Daniel~J. Mankowitz, Esme~Sutherland Robson, Pushmeet Kohli,
+  Nando de~Freitas, Koray Kavukcuoglu, and Oriol Vinyals.
+\newblock Competition-level code generation with {AlphaCode}.
+\newblock \emph{arXiv preprint arXiv:2203.07814}, 2022.
+
+\bibitem[Lu et~al.(2026)Lu, Pan, Birlikci, Lee, Wang, Choudhury, Ma, Qin,
+  Baronio, Alberti, et~al.]{cognition2026frontiercode}
+Eric Lu, Ben Pan, Deniz Birlikci, Sam Lee, Ray Wang, Rohan Choudhury, Fermi Ma,
+  TC~Qin, Carlo Baronio, Silas Alberti, et~al.
+\newblock Introducing {FrontierCode}.
+\newblock \url{https://cognition.ai/blog/frontier-code}, 2026.
+
+\bibitem[Lyu et~al.(2026)Lyu, Yang, Huang, Zhang, Xu, Li, Han, Zhang, Zhang,
+  Huang, et~al.]{lyu2026mlsbench}
+Bohan Lyu, Yucheng Yang, Siqiao Huang, Jiaru Zhang, Qixin Xu, Xinghan Li,
+  Xinyang Han, Yicheng Zhang, Huaqing Zhang, Runhan Huang, et~al.
+\newblock {MLS-Bench}: A holistic and rigorous assessment of {AI} systems on
+  building better {AI}.
+\newblock \emph{arXiv preprint arXiv:2605.08678}, 2026.
+
+\bibitem[Mang et~al.(2025)Mang, Chai, Li, Mao, Zhou, Du, Li, Liu, Chen, Wang,
+  et~al.]{mang2025frontiercs}
+Qiuyang Mang, Wenhao Chai, Zhifei Li, Huanzhi Mao, Shang Zhou, Alexander Du,
+  Hanchen Li, Shu Liu, Edwin Chen, Yichuan Wang, et~al.
+\newblock {FrontierCS}: Evolving challenges for evolving intelligence.
+\newblock \emph{arXiv preprint arXiv:2512.15699}, 2025.
+
+\bibitem[Mang et~al.(2026)Mang, Liu, Peng, Pimpalgaonkar, Dimakis, and
+  Cheung]{mang2026humansstillbeatai}
+Qiuyang Mang, Kaiyuan Liu, Bo~Peng, Shreyas Pimpalgaonkar, Alex Dimakis, and
+  Alvin Cheung.
+\newblock Humans still beat {AI} in the long horizon: Revisiting test-time
+  scaling in the agent era.
+\newblock
+  \url{https://joyemang33.github.io/blog/2026/humans-dont-just-sample/}, 2026.
+
+\bibitem[{Mathematical Association of America}(2026)]{maa2026aime}
+{Mathematical Association of America}.
+\newblock {MAA} invitational competitions: American invitational mathematics
+  examination ({AIME}).
+\newblock \url{https://maa.org/maa-invitational-competitions/}, 2026.
+
+\bibitem[Merrill et~al.(2026)Merrill, Shaw, Carlini, Li, Raj, Bercovich,
+  et~al.]{merrill2026terminalbench}
+Mike~A. Merrill, Alexander~G. Shaw, Nicholas Carlini, Boxuan Li, Harsh Raj,
+  Ivan Bercovich, et~al.
+\newblock {Terminal-Bench}: Benchmarking agents on hard, realistic tasks in
+  command line interfaces.
+\newblock In \emph{The Fourteenth International Conference on Learning
+  Representations}, 2026.
+
+\bibitem[Newman(2005)]{newman2005power}
+Mark E.~J. Newman.
+\newblock Power laws, pareto distributions and zipf's law.
+\newblock \emph{Contemporary Physics}, 46\penalty0 (5):\penalty0 323--351,
+  2005.
+
+\bibitem[{OpenAI}(2023)]{openai2023gpt4}
+{OpenAI}.
+\newblock {GPT}-4 technical report.
+\newblock \emph{arXiv preprint arXiv:2303.08774}, 2023.
+
+\bibitem[{OpenAI}(2024{\natexlab{a}})]{openai2024learningreason}
+{OpenAI}.
+\newblock Learning to reason with {LLMs}.
+\newblock \url{https://openai.com/index/learning-to-reason-with-llms/},
+  2024{\natexlab{a}}.
+
+\bibitem[{OpenAI}(2024{\natexlab{b}})]{openai2024swebenchverified}
+{OpenAI}.
+\newblock Introducing {SWE}-bench verified.
+\newblock \url{https://openai.com/index/introducing-swe-bench-verified/},
+  2024{\natexlab{b}}.
+
+\bibitem[{OpenAI}(2025)]{openai2025cua}
+{OpenAI}.
+\newblock Computer-using agent.
+\newblock \url{https://openai.com/index/computer-using-agent/}, 2025.
+
+\bibitem[OpenAI(2025{\natexlab{a}})]{openai2025gpt45systemcard}
+OpenAI.
+\newblock {GPT-4.5 System Card}.
+\newblock \url{https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf},
+  2025{\natexlab{a}}.
+
+\bibitem[OpenAI(2025{\natexlab{b}})]{openai2025gpt52systemcard}
+OpenAI.
+\newblock {Update to GPT-5 System Card: GPT-5.2}.
+\newblock
+  \url{https://cdn.openai.com/pdf/3a4153c8-c748-4b71-8e31-aecbde944f8d/oai_5_2_system-card.pdf},
+  2025{\natexlab{b}}.
+
+\bibitem[OpenAI(2025{\natexlab{c}})]{openai2025gpt5systemcard}
+OpenAI.
+\newblock {GPT-5 System Card}.
+\newblock \emph{arXiv preprint arXiv:2601.03267}, 2025{\natexlab{c}}.
+
+\bibitem[{OpenAI}(2026{\natexlab{a}})]{openai2026codexgoals}
+{OpenAI}.
+\newblock {Follow a Goal}.
+\newblock \url{https://developers.openai.com/codex/use-cases/follow-goals},
+  2026{\natexlab{a}}.
+\newblock Codex documentation. Accessed June 18, 2026.
+
+\bibitem[{OpenAI}(2026{\natexlab{b}})]{openai2026gpt54thinkingsystemcard}
+{OpenAI}.
+\newblock {GPT-5.4 Thinking System Card}.
+\newblock
+  \url{https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf},
+  March 2026{\natexlab{b}}.
+\newblock System card. Published March 5, 2026.
+
+\bibitem[{OpenAI}(2026{\natexlab{c}})]{openai2026gpt55systemcard}
+{OpenAI}.
+\newblock {GPT-5.5 System Card}.
+\newblock \url{https://deploymentsafety.openai.com/gpt-5-5/gpt-5-5.pdf}, April
+  2026{\natexlab{c}}.
+\newblock System card. Published April 23, 2026.
+
+\bibitem[Owen(2024)]{owen2024predictable}
+David Owen.
+\newblock How predictable is language model benchmark performance?
+\newblock \emph{arXiv preprint arXiv:2401.04757}, 2024.
+
+\bibitem[Patwardhan et~al.(2025)Patwardhan, Dias, Proehl, Kim, Wang, Watkins,
+  Fishman, Aljubeh, Thacker, Fauconnet, et~al.]{patwardhan2025gdpval}
+Tejal Patwardhan, Rachel Dias, Elizabeth Proehl, Grace Kim, Michele Wang,
+  Olivia Watkins, Simon~Posada Fishman, Marwan Aljubeh, Phoebe Thacker,
+  Laurance Fauconnet, et~al.
+\newblock {GDPval}: Evaluating {AI} model performance on real-world
+  economically valuable tasks.
+\newblock \emph{arXiv preprint arXiv:2510.04374}, 2025.
+
+\bibitem[Qiu et~al.(2026)Qiu, Deng, Deng, Dong, Fu, Li, Li, Zhang, Zheng, Bao,
+  et~al.]{qiu2026prbench}
+Shi Qiu, Junyi Deng, Yiwei Deng, Haoran Dong, Jieyu Fu, Mao Li, Zeyu Li,
+  Zhaolong Zhang, Huiwen Zheng, Leidong Bao, et~al.
+\newblock {PRBench}: End-to-end paper reproduction in physics research.
+\newblock \emph{arXiv preprint arXiv:2603.27646}, 2026.
+
+\bibitem[Rein et~al.(2023)Rein, Hou, Stickland, Petty, Pang, Dirani, Michael,
+  and Bowman]{rein2023gpqa}
+David Rein, Betty~Li Hou, Asa~Cooper Stickland, Jackson Petty, Richard~Yuanzhe
+  Pang, Julien Dirani, Julian Michael, and Samuel~R. Bowman.
+\newblock {GPQA}: A graduate-level google-proof {Q\&A} benchmark.
+\newblock \emph{arXiv preprint arXiv:2311.12022}, 2023.
+
+\bibitem[Rein et~al.(2025)Rein, Becker, Deng, Nix, Canal, O'Connel, Arnott,
+  Bloom, Broadley, et~al.]{rein2025hcast}
+David Rein, Joel Becker, Amy Deng, Seraphina Nix, Chris Canal, Daniel O'Connel,
+  Pip Arnott, Ryan Bloom, Thomas Broadley, et~al.
+\newblock {HCAST}: Human-calibrated autonomy software tasks.
+\newblock \emph{arXiv preprint arXiv:2503.17354}, 2025.
+
+\bibitem[Ruan et~al.(2024)Ruan, Maddison, and Hashimoto]{ruan2024observational}
+Yangjun Ruan, Chris~J. Maddison, and Tatsunori Hashimoto.
+\newblock Observational scaling laws and the predictability of language model
+  performance.
+\newblock \emph{arXiv preprint arXiv:2405.10938}, 2024.
+
+\bibitem[Shen et~al.(2025)Shen, Bai, Zhang, Zhou, Setlur, Tong, Caples, Jiang,
+  Zhang, Talwalkar, and Kumar]{shen2025thinkingdoing}
+Junhong Shen, Hao Bai, Lunjun Zhang, Yifei Zhou, Amrith Setlur, Shengbang Tong,
+  Diego Caples, Nan Jiang, Tong Zhang, Ameet Talwalkar, and Aviral Kumar.
+\newblock Thinking vs. doing: Agents that reason by scaling test-time
+  interaction.
+\newblock \emph{arXiv preprint arXiv:2506.07976}, 2025.
+
+\bibitem[Siegel et~al.(2024)Siegel, Kapoor, Nadgir, Stroebl, and
+  Narayanan]{siegel2024corebench}
+Zachary~S. Siegel, Sayash Kapoor, Nitya Nadgir, Benedikt Stroebl, and Arvind
+  Narayanan.
+\newblock {CORE}-bench: Fostering the credibility of published research through
+  a computational reproducibility agent benchmark.
+\newblock \emph{arXiv preprint arXiv:2409.11363}, 2024.
+
+\bibitem[Snell et~al.(2024)Snell, Lee, Xu, and Kumar]{snell2024testtime}
+Charlie Snell, Jaehoon Lee, Kelvin Xu, and Aviral Kumar.
+\newblock Scaling {LLM} test-time compute optimally can be more effective than
+  scaling model parameters.
+\newblock \emph{arXiv preprint arXiv:2408.03314}, 2024.
+
+\bibitem[Starace et~al.(2025)Starace, Jaffe, Sherburn, Aung, Chan, Maksin,
+  Dias, Mays, Kinsella, Thompson, Heidecke, Glaese, and
+  Patwardhan]{starace2025paperbench}
+Giulio Starace, Oliver Jaffe, Dane Sherburn, James Aung, Jun~Shern Chan, Leon
+  Maksin, Rachel Dias, Evan Mays, Benjamin Kinsella, Wyatt Thompson, Johannes
+  Heidecke, Amelia Glaese, and Tejal Patwardhan.
+\newblock {PaperBench}: Evaluating {AI}'s ability to replicate {AI} research.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning}, volume 267 of \emph{Proceedings of Machine Learning Research},
+  pages 56843--56873. PMLR, 2025.
+
+\bibitem[Sun et~al.(2026)Sun, Han, Zhang, Pang, Wang,
+  et~al.]{sun2026agentslastexam}
+Yiyou Sun, Xinyang Han, Weichen Zhang, Yuanbo Pang, Tianyu Wang, et~al.
+\newblock Agents' last exam.
+\newblock \emph{arXiv preprint arXiv:2606.05405}, 2026.
+
+\bibitem[Thai et~al.(2025)Thai, Le, Manh, Nhat, and Bui]{le2025sweevo}
+Minh V.~T. Thai, Tue Le, Dung~Nguyen Manh, Huy~Phan Nhat, and Nghi D.~Q. Bui.
+\newblock {SWE-EVO}: Benchmarking coding agents in long-horizon software
+  evolution scenarios.
+\newblock \emph{arXiv preprint arXiv:2512.18470}, 2025.
+
+\bibitem[Wei et~al.(2025{\natexlab{a}})Wei, Sun, Papay, McKinney, Han, Fulford,
+  Chung, Passos, Fedus, and Glaese]{openai2025browsecomp}
+Jason Wei, Zhiqing Sun, Spencer Papay, Scott McKinney, Jeffrey Han, Isa
+  Fulford, Hyung~Won Chung, Alex~Tachard Passos, William Fedus, and Amelia
+  Glaese.
+\newblock {BrowseComp}: A simple yet challenging benchmark for browsing agents.
+\newblock \emph{arXiv preprint arXiv:2504.12516}, 2025{\natexlab{a}}.
+
+\bibitem[Wei et~al.(2025{\natexlab{b}})Wei, Sachdeva, Coleman, He, Bei, Ning,
+  Ai, Li, He, Chi, et~al.]{wei2025evomemory}
+Tianxin Wei, Noveen Sachdeva, Benjamin Coleman, Zhankui He, Yuanchen Bei,
+  Xuying Ning, Mengting Ai, Yunzhe Li, Jingrui He, Ed~H. Chi, et~al.
+\newblock {Evo-Memory}: Benchmarking {LLM} agent test-time learning with
+  self-evolving memory.
+\newblock \emph{arXiv preprint arXiv:2511.20857}, 2025{\natexlab{b}}.
+
+\bibitem[Weibull(1951)]{weibull1951statistical}
+Waloddi Weibull.
+\newblock A statistical distribution function of wide applicability.
+\newblock \emph{Journal of Applied Mechanics}, 18\penalty0 (3):\penalty0
+  293--297, 1951.
+
+\bibitem[Wijk et~al.(2025)Wijk, Lin, Becker, Jawhar, Parikh, Broadley, Chan,
+  Chen, Clymer, Dhyani, et~al.]{wijk2024rebench}
+Hjalmar Wijk, Tao Lin, Joel Becker, Sami Jawhar, Neev Parikh, Thomas Broadley,
+  Lawrence Chan, Michael Chen, Josh Clymer, Jai Dhyani, et~al.
+\newblock {RE}-bench: Evaluating frontier {AI} {R\&D} capabilities of language
+  model agents against human experts.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning}, 2025.
+
+\bibitem[{Wikipedia contributors}(2025)]{wikipedia_scurve}
+{Wikipedia contributors}.
+\newblock Sigmoid function.
+\newblock \url{https://en.wikipedia.org/wiki/Sigmoid_function}, 2025.
+
+\bibitem[Wu et~al.(2024{\natexlab{a}})Wu, Tam, Lin, Chen, and
+  yi~Lee]{wu2024streambench}
+Cheng-Kuang Wu, Zhi~Rui Tam, Chieh-Yen Lin, Yun-Nung Chen, and Hung yi~Lee.
+\newblock {StreamBench}: Towards benchmarking continuous improvement of
+  language agents.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  2024{\natexlab{a}}.
+
+\bibitem[Wu et~al.(2024{\natexlab{b}})Wu, Sun, Li, Welleck, and
+  Yang]{wu2024inference}
+Yangzhen Wu, Zhiqing Sun, Shanda Li, Sean Welleck, and Yiming Yang.
+\newblock Inference scaling laws: An empirical analysis of compute-optimal
+  inference for problem-solving with language models.
+\newblock \emph{arXiv preprint arXiv:2408.00724}, 2024{\natexlab{b}}.
+
+\bibitem[Xu et~al.(2026{\natexlab{a}})Xu, Yang, Shen,
+  et~al.]{xu2026roadmapbench}
+Xinbo Xu, Ruihan Yang, Haiyang Shen, et~al.
+\newblock {RoadmapBench}: Evaluating long-horizon agentic software development
+  across version upgrades.
+\newblock \emph{arXiv preprint arXiv:2605.15846}, 2026{\natexlab{a}}.
+
+\bibitem[Xu et~al.(2026{\natexlab{b}})Xu, Chen, Huang, Jiang, Chen, Hua, Wu,
+  Liu, He, Li, et~al.]{xu2026autolab}
+Zhangchen Xu, Junda Chen, Yue Huang, Dongfu Jiang, Jiefeng Chen, Hang Hua,
+  Zijian Wu, Zheyuan Liu, Zexue He, Lichi Li, et~al.
+\newblock {AutoLab}: Can frontier models solve long-horizon auto research and
+  engineering tasks?
+\newblock \emph{arXiv preprint arXiv:2606.05080}, 2026{\natexlab{b}}.
+
+\bibitem[Yang et~al.(2026)Yang, Lieret, Ma, Thakkar, Pedchenko, Sootla,
+  McMilin, Yin, Hou, Synnaeve, Yang, and Press]{yang2026programbench}
+John Yang, Kilian Lieret, Jeffrey Ma, Parth Thakkar, Dmitrii Pedchenko, Sten
+  Sootla, Emily McMilin, Pengcheng Yin, Rui Hou, Gabriel Synnaeve, Diyi Yang,
+  and Ofir Press.
+\newblock {ProgramBench}: Can language models rebuild programs from scratch?
+\newblock \emph{arXiv preprint arXiv:2605.03546}, 2026.
+
+\bibitem[Ye et~al.(2025)Ye, Yuan, Cooray, Dillmann, Roque, Baron, Frank,
+  Martin-Alvarez, Koblischke, Qu, et~al.]{ye2025replicationbench}
+Christine Ye, Sihan Yuan, Suchetha Cooray, Steven Dillmann, Ian L.~V. Roque,
+  Dalya Baron, Philipp Frank, Sergio Martin-Alvarez, Nolan Koblischke, Frank~J.
+  Qu, et~al.
+\newblock {ReplicationBench}: Can {AI} agents replicate astrophysics research
+  papers?
+\newblock \emph{arXiv preprint arXiv:2510.24591}, 2025.
+
+\bibitem[{Z.ai}(2026)]{zai2026glm51}
+{Z.ai}.
+\newblock {GLM-5.1}: Towards long-horizon tasks.
+\newblock \url{https://z.ai/blog/glm-5.1}, 2026.
+\newblock Model release blog and model card.
+
+\bibitem[Zhang et~al.(2026{\natexlab{a}})Zhang, Jin, Syrgkanis, and
+  Kakade]{zhang2026prescriptive}
+Hanlin Zhang, Jikai Jin, Vasilis Syrgkanis, and Sham Kakade.
+\newblock Prescriptive scaling reveals the evolution of language model
+  capabilities.
+\newblock \emph{arXiv preprint arXiv:2602.15327}, 2026{\natexlab{a}}.
+
+\bibitem[Zhang et~al.(2026{\natexlab{b}})Zhang, Zhang, Fei,
+  et~al.]{zhang2026sweagi}
+Zhirui Zhang, Hongbo Zhang, Haoxiang Fei, et~al.
+\newblock {SWE-AGI}: Benchmarking specification-driven software construction
+  with {MoonBit} in the era of autonomous agents.
+\newblock \emph{arXiv preprint arXiv:2602.09447}, 2026{\natexlab{b}}.
+
+\bibitem[Zheng et~al.(2025)Zheng, Cai, Li, Zhang, Li, Zhang, Song, and
+  Ma]{zheng2025lifelongagentbench}
+Junhao Zheng, Xidi Cai, Qiuke Li, Duzhen Zhang, ZhongZhi Li, Yingying Zhang,
+  Le~Song, and Qianli Ma.
+\newblock {LifelongAgentBench}: Evaluating {LLM} agents as lifelong learners.
+\newblock \emph{arXiv preprint arXiv:2505.11942}, 2025.
+
+\end{thebibliography}

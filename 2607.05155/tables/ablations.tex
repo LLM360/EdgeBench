@@ -1,0 +1,40 @@
+\providecommand{\NA}{\textemdash}
+\providecommand{\best}[1]{}
+\renewcommand{\best}[1]{\begingroup\bfseries\boldmath #1\endgroup}
+\providecommand{\second}[1]{}
+\renewcommand{\second}[1]{\underline{#1}}
+\providecommand{\sci}[2]{\ensuremath{#1\times 10^{#2}}}
+\begin{table*}[t!]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}*{6}{>{\centering\arraybackslash}p{0.10\linewidth}}@{}}
+\BenchTopRule
+\textbf{Task} & \multicolumn{3}{c}{\textbf{GPT-5.5}} & \multicolumn{3}{c}{\textbf{GPT-5.4}} \\
+\BenchCMidRule{2-4} \BenchCMidRule{5-7}
+ & \textbf{Base} & \textbf{w/ Goal} & \textbf{w/ Ralph} & \textbf{Base} & \textbf{w/ Goal} & \textbf{w/ Ralph} \\
+\BenchMidRule
+\texttt{portfolio\_\allowbreak{}risk\_\allowbreak{}calibration} & \ensuremath{\mathrm{25.0}} & \second{\ensuremath{\mathrm{27.5}}} & \best{\ensuremath{\mathrm{34.3}}} & \ensuremath{\mathrm{10.7}} & \best{\ensuremath{\mathrm{19.8}}} & \second{\ensuremath{\mathrm{12.2}}} \\
+\texttt{storyboard\_\allowbreak{}ad\_\allowbreak{}copywriting} & \ensuremath{\mathrm{77.0}} & \second{\ensuremath{\mathrm{88.3}}} & \best{\ensuremath{\mathrm{97.3}}} & \ensuremath{\mathrm{65.7}} & \second{\ensuremath{\mathrm{78.0}}} & \best{\ensuremath{\mathrm{83.3}}} \\
+\texttt{arc\_\allowbreak{}compiler\_\allowbreak{}runtime} & \best{\ensuremath{\mathrm{72.4}}} & \second{\ensuremath{\mathrm{70.6}}} & \ensuremath{\mathrm{52.6}} & \second{\ensuremath{\mathrm{50.0}}} & \ensuremath{\mathrm{47.2}} & \best{\ensuremath{\mathrm{51.2}}} \\
+\texttt{battery\_\allowbreak{}soh\_\allowbreak{}rul\_\allowbreak{}anomaly} & \second{\ensuremath{\mathrm{30.2}}} & \ensuremath{\mathrm{23.8}} & \best{\ensuremath{\mathrm{48.8}}} & \best{\ensuremath{\mathrm{14.7}}} & \second{\ensuremath{\mathrm{14.6}}} & \ensuremath{\mathrm{13.4}} \\
+\texttt{borden\_\allowbreak{}source\_\allowbreak{}inversion} & \second{\ensuremath{\mathrm{38.5}}} & \ensuremath{\mathrm{32.8}} & \best{\ensuremath{\mathrm{62.2}}} & \ensuremath{\mathrm{8.0}} & \second{\ensuremath{\mathrm{17.3}}} & \best{\ensuremath{\mathrm{23.2}}} \\
+\texttt{capecod\_\allowbreak{}plume\_\allowbreak{}reconstruction} & \second{\ensuremath{\mathrm{16.4}}} & \ensuremath{\mathrm{16.0}} & \best{\ensuremath{\mathrm{17.3}}} & \ensuremath{\mathrm{12.6}} & \second{\ensuremath{\mathrm{13.3}}} & \best{\ensuremath{\mathrm{13.7}}} \\
+\texttt{combinatorial\_\allowbreak{}games\_\allowbreak{}formalization} & \ensuremath{\mathrm{38.2}} & \best{\ensuremath{\mathrm{45.3}}} & \second{\ensuremath{\mathrm{39.8}}} & \second{\ensuremath{\mathrm{17.8}}} & \ensuremath{\mathrm{13.0}} & \best{\ensuremath{\mathrm{20.2}}} \\
+\texttt{ffmpeg\_\allowbreak{}swscale\_\allowbreak{}reimplementation} & \ensuremath{\mathrm{15.3}} & \second{\ensuremath{\mathrm{16.4}}} & \best{\ensuremath{\mathrm{25.2}}} & \ensuremath{\mathrm{13.9}} & \best{\ensuremath{\mathrm{28.3}}} & \second{\ensuremath{\mathrm{21.8}}} \\
+\texttt{flt\_\allowbreak{}regular\_\allowbreak{}formalization} & \best{\ensuremath{\mathrm{75.1}}} & \second{\ensuremath{\mathrm{66.7}}} & \ensuremath{\mathrm{58.6}} & \best{\ensuremath{\mathrm{48.3}}} & \second{\ensuremath{\mathrm{43.7}}} & \second{\ensuremath{\mathrm{43.7}}} \\
+\texttt{git\_\allowbreak{}rewrite\_\allowbreak{}in\_\allowbreak{}zig} & \ensuremath{\mathrm{18.4}} & \second{\ensuremath{\mathrm{20.5}}} & \best{\ensuremath{\mathrm{22.0}}} & \ensuremath{\mathrm{15.4}} & \best{\ensuremath{\mathrm{18.4}}} & \second{\ensuremath{\mathrm{15.8}}} \\
+\texttt{tryst\_\allowbreak{}text\_\allowbreak{}adventure} & \second{\ensuremath{\mathrm{55.7}}} & \best{\ensuremath{\mathrm{56.2}}} & \ensuremath{\mathrm{40.2}} & \best{\ensuremath{\mathrm{44.3}}} & \ensuremath{\mathrm{32.9}} & \second{\ensuremath{\mathrm{42.4}}} \\
+\texttt{openttd\_\allowbreak{}transport\_\allowbreak{}ai} & \ensuremath{\mathrm{28.1}} & \best{\ensuremath{\mathrm{39.8}}} & \second{\ensuremath{\mathrm{30.6}}} & \best{\ensuremath{\mathrm{11.9}}} & \ensuremath{\mathrm{1.2}} & \second{\ensuremath{\mathrm{8.1}}} \\
+\texttt{pocketbase\_\allowbreak{}backend\_\allowbreak{}architecture} & \best{\ensuremath{\mathrm{62.5}}} & \best{\ensuremath{\mathrm{62.5}}} & \second{\ensuremath{\mathrm{41.7}}} & \second{\ensuremath{\mathrm{20.8}}} & \best{\ensuremath{\mathrm{54.2}}} & \ensuremath{\mathrm{0.0}} \\
+\texttt{symbolic\_\allowbreak{}integration\_\allowbreak{}engine} & \best{\ensuremath{\mathrm{44.0}}} & \ensuremath{\mathrm{36.6}} & \second{\ensuremath{\mathrm{37.7}}} & \ensuremath{\mathrm{30.9}} & \best{\ensuremath{\mathrm{63.7}}} & \second{\ensuremath{\mathrm{37.2}}} \\
+\BenchMidRule
+\textbf{Avg.} & \ensuremath{\mathrm{42.6}} & \second{\ensuremath{\mathrm{43.1}}} & \best{\ensuremath{\mathrm{43.4}}} & \ensuremath{\mathrm{26.1}} & \best{\ensuremath{\mathrm{31.8}}} & \second{\ensuremath{\mathrm{27.6}}} \\
+\BenchBottomRule
+\end{tabular}%
+}
+\caption{Harness-level continuation ablation of /goal mode and the Ralph loop. GPT-5.5 and GPT-5.4 are evaluated with Base, Goal, and Ralph settings under the same 12-hour budget; each value is the mean score over valid runs, and the Avg. row averages the displayed task rows. Incomplete cells are detailed in Appendix~\ref{sec:appendix-ablation-setting}. Bold marks the best setting and underlining marks the second-best setting.}
+\label{tab:feature_ablation_goal_ralph}
+\end{table*}

@@ -1,0 +1,46 @@
+\section{Related Work}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\centering\arraybackslash}p{0.28\linewidth}>{\centering\arraybackslash}p{0.08\linewidth}>{\centering\arraybackslash}p{0.09\linewidth}>{\centering\arraybackslash}p{0.34\linewidth}>{\centering\arraybackslash}p{0.13\linewidth}@{}}
+\BenchTopRule
+Benchmark & \# Tasks & Horizon & Scenario & Self-evolution \\
+\BenchMidRule
+MMLU~\cite{hendrycks2021mmlu} & 15{,}908 & Short & Knowledge QA & No \\
+AIME~\cite{maa2026aime} & 30 & Short & HS math competition & No \\
+GDPval Gold~\cite{patwardhan2025gdpval} & 220 & Short & Professional deliverables & No \\
+SWE-bench verified~\cite{jimenez2024swebench,openai2024swebenchverified} & 500 & Short & Issue repair & No \\
+Terminal-Bench 2.0~\cite{merrill2026terminalbench} & 89 & Short & Terminal workflows & No \\
+Continual Learning Bench~\cite{asawa2026clbench} & 6 & Short & Controlled task sequences & Yes \\
+CL-bench~\cite{dou2026clbench} & 1{,}899 & Short & Context learning & No \\
+FrontierCode~\cite{cognition2026frontiercode} & 150 & N/A & Production code changes & No \\
+NL2Repo-Bench~\cite{ding2025nl2repobench} & 104 & Medium & Repo generation & No \\
+Agents' Last Exam~\cite{sun2026agentslastexam} & 152 public & Medium & Computer-use work & No \\
+MLE-bench~\cite{chan2024mlebench} & 75 & Long & ML engineering & Yes \\
+MLS-Bench~\cite{lyu2026mlsbench} & 140 & Long & ML research & Subset \\
+Frontier-Eng~\cite{chi2026frontiereng} & 47 & Long & Engineering design & No \\
+Frontier-CS~\cite{mang2025frontiercs} & 156 & Long & Open-ended CS tasks & No \\
+AutoLab~\cite{xu2026autolab} & 36 & Long & Research/engineering optimization & No \\
+FrontierSWE~\cite{chu2026frontierswe} & 17 & Long & SWE/performance tuning & No \\
+\BenchMidRule
+\textbf{\benchmark{} (ours)} & 134 & Ultra-long & SWE, science/ML, professional work, optimization, formal proving, games & Yes \\
+\BenchBottomRule
+\end{tabular*}
+\vspace{0.15em}
+\captionof{table}{\textbf{Comparison with representative benchmarks.} Horizon describes the expected single-instance task contract rather than total suite runtime. A benchmark is counted as measuring self-evolution only when performance is explicitly plotted against a resource axis such as time or sample count.}
+\label{tab:benchmark-comparison}
+\end{minipage}
+\end{center}
+\vspace{0.35\baselineskip}
+
+\textbf{Existing benchmarks cover major parts of agent capability but rarely measure how an agent improves within a run.} Closed-form QA, math, and coding benchmarks such as MMLU~\cite{hendrycks2021mmlu}, AIME~\cite{maa2026aime}, and HumanEval~\cite{chen2021humaneval}, together with endpoint patch benchmarks such as SWE-bench~\cite{jimenez2024swebench}, evaluate final answers or final patches. More agentic and work-oriented benchmarks, including GDPval~\cite{patwardhan2025gdpval}, Agents' Last Exam~\cite{sun2026agentslastexam}, and FrontierCode~\cite{cognition2026frontiercode}, broaden the task interface to professional deliverables, computer-use workflows, or production code changes. Their central reported quantities, however, remain end-state measures: task success, artifact quality, pass rate, or readiness for production. \benchmark{} instead measures the improvement trajectory over time.
+
+\textbf{Some benchmarks study learning, but they focus on restricted domains and shorter horizons.} CL-bench~\cite{dou2026clbench}, EvaLearn~\cite{dou2025evalearn}, and Continual Learning Bench~\cite{asawa2026clbench} evaluate whether models improve from a static context or static information streams whose content is not primarily shaped by the agent's actions within a single task. Iterative optimization benchmarks such as MLE-bench~\cite{chan2024mlebench}, MLS-Bench~\cite{lyu2026mlsbench}, Frontier-Eng~\cite{chi2026frontiereng}, Frontier-CS~\cite{mang2025frontiercs}, and ALE-Bench~\cite{imajuku2025alebench} further include repeated attempts, empirical feedback, or visible metrics. The closest long-horizon agentic comparators are AutoLab~\cite{xu2026autolab} and FrontierSWE~\cite{chu2026frontierswe}: both evaluate agents that repeatedly edit executable artifacts and incorporate feedback. \benchmark{} differs by covering a broader range of executable domains, using a day-scale task contract, and applying the same trajectory metrics consistently across all tasks.
+
+\textbf{Scaling laws have been widely studied in prior work, but learning from diverse real-world environments remains underexplored.} Classical scaling laws study pretraining, relating loss or benchmark performance to model size, data, and compute~\cite{kaplan2020scaling,hoffmann2022training}; later work studies bounded benchmark performance curves as model scale increases~\cite{owen2024predictable,ruan2024observational,bhagia2024taskscaling,zhang2026prescriptive}. Test-time scaling laws have also been studied across several inference-time methods: plain repeated sampling~\cite{chen2021humaneval,li2022alphacode,brown2024largelanguagemonkeys}, search, revision, or verifier-guided compute allocation~\cite{snell2024testtime,wu2024inference}, and long-chain-of-thought inference in reasoning models~\cite{openai2024learningreason,deepseekai2025deepseekr1}. Agentic test-time scaling has been observed in computer-use and browsing agents~\cite{openai2025cua,openai2025browsecomp}, studied through interaction-length scaling~\cite{shen2025thinkingdoing}, and revisited through long-horizon human-agent comparisons~\cite{mang2026humansstillbeatai}. These studies are closer to our setting but cover narrower domains or fewer tasks and do not establish a cross-domain scaling law. Reinforcement-learning scaling is also relevant because it studies learning from environment feedback~\cite{hilton2023rlscaling,khatri2025scalingrlcompute}, while \benchmark{} measures elapsed interaction time in deployed agent trajectories. In-context learning from task feedback is relatively inexpensive to evaluate repeatedly across many executable environments, while large reinforcement-learning runs are costly and typically cover fewer environments. This broader environment coverage may explain why the aggregate curves are stable enough to reveal a scaling law.
+
+A more detailed benchmark-by-benchmark discussion is provided in Appendix~\ref{sec:additional-related-work}.

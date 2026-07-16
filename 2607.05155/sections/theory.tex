@@ -1,0 +1,813 @@
+
+\section{A Comprehensive Derivation of the Log-Sigmoid Law}
+\label{sec:theory}
+
+This appendix gives a comprehensive derivation of a sufficient mechanism for the empirical log-sigmoid law observed in the \emph{task-aggregate} environment-learning curve. We assume the score of a single task is observed through finitely many visible \emph{score units}, so its best-so-far curve can be a jagged staircase with long plateaus and abrupt breakthroughs. These irregularities are the expected finite-resolution behavior of individual tasks. Under explicit cut-mixing, granularity, midpoint-alignment, and speed-concentration assumptions, we show how averaging many independently evaluated task scores can yield a smooth log-sigmoid limit.
+
+
+Our central modeling assumption: \textbf{environment learning is a frontier expansion process on the task graph}. We model a task environment as a latent graph whose nodes are small score units, and the environment learning process can be viewed as frontier expansion on this graph. Our theory provides a clear path from frontier expansion process to the observed log-sigmoid law.
+
+The exposition of the derivation follows five steps:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=2.1em,itemsep=0.15em,topsep=0.25em]
+    \item \textbf{Preliminaries.} Define the model-conditioned task graph, score units, score measure $\mu$, influence matrix $K$, its support graph $\mathcal E_K$, and the capability field.
+    \item \textbf{Environment learning as a frontier expansion process.} The model improves its outputs based on feedback it has previously received. Within one task, the conditional expected score-growth rate is a weighted cut from unlocked score nodes to locked score nodes of the task graph.
+    \item \textbf{Single-task curves range from jagged to a smooth limit.} Weighted cut mixing and small score units turn the jagged process into a logistic ordinary differential equation in the many-unit limit.
+    \item \textbf{Many-task aggregate reveals the log-sigmoid law.} Even though the expansion process on tasks with finite score units remain jagged processes, the benchmark-aggregated curve converges to a smooth log-sigmoid law.
+    \item \textbf{Graph self-similarity induces a log scale for time.} Finally, we show that when the task graph displays self-similar structure at different resolutions, frontier expansion naturally exhibits a log-time scale.
+\end{enumerate}
+
+Throughout the section, we denote raw interaction time by $t>0$, and the raw task/benchmark score by \(S(t)\). Let $t_{\mathrm{mid}} >0$ and \(S_{\max} > 0\) be fitted parameters. The corresponding log-time coordinate and normalized score are
+\begin{equation*}
+    u=\log t-\log t_{\mathrm{mid}},
+    \qquad x(u) = \frac{S(t)}{S_{\max}}
+\end{equation*}
+We show how the following normalized log-sigmoid dynamics, with frontier speed $\beta$ (also a fitted parameter), can arise as a natural many-task limit of the averaged benchmark score:
+\begin{equation*}
+    \frac{\mathrm{d} x(u)}{\mathrm{d} u}= \beta x(u) (1 - x(u)),
+    \qquad
+    x\left(\log \frac{t}{t_{\mathrm{mid}}}\right)=\frac{1}{1+(t_{\mathrm{mid}}/t)^\beta}.
+\end{equation*}
+The value at raw time $t=0$ is understood as the boundary limit $u\to-\infty$.
+
+
+\subsection{Preliminaries: Task Graph and the Attainable Support}
+\label{subsec:theory-prelim}
+
+We start with one task and one fixed model. The main assumption is that score units are the nodes of an \emph{agent-conditioned task graph}: unlocked nodes supply an influence field, locked nodes receive this field through directed influence edges, and a locked node can become unlocked at a rate proportional to the field strength.
+
+\begin{definition}[Task graph]
+\label{def:task-graph}
+Let $E$ be the set of visible score-unit nodes for the task. The language model induces a nonnegative influence matrix
+\begin{equation*}
+    K=(K_{ij})_{i,j\in E},
+    \qquad K_{ij}\ge 0.
+\end{equation*}
+Its directed support graph has edge set \(\mathcal E_K=\{j\to i:K_{ij}>0\}\) where $j\to i$ means that unlocked source node $j$ can help unlock target node $i$. We write \(G_K=(E,\mathcal E_K)\) for the resulting task graph.
+\end{definition}
+
+If one begins with a larger ambient graph, the restriction to the model-relevant part is made before writing $E$ and $K$; empirically, that restriction is absorbed into the fitted ceiling $S_{\max}$. Next we introduce the score units and the corresponding task influence field.
+
+\begin{definition}[Score units and normalized score measure]
+\label{def:score-units-measure}
+On the latent graph $G_K=(E,\mathcal E_K)$, each node $i\in E$ represents a score unit with weight $\omega_i\ge0$. The normalized score measure is the probability measure
+\begin{equation*}
+    W=\sum_{i\in E}\omega_i>0,
+    \qquad
+    \mu_i=\frac{\omega_i}{W},
+    \qquad
+    \mu(A)=\sum_{i\in A}\mu_i, \quad \forall A\subseteq E.
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Unlock state, unlocked and locked sets]
+\label{def:unlock-state-sets}
+The unlock state of node $i$ at log-time $u$ is $n_i(u)\in\{0,1\}$, and once a node is unlocked, it cannot be locked again. The normalized score, unlocked set, and locked set are defined by
+\begin{equation}\label{eq:frontier-unlocked-locked-sets}
+    x(u)=\sum_{i\in E}\mu_i n_i(u),
+    \qquad
+    U(u)=\{j\in E:n_j(u)=1\},
+    \qquad
+    L(u)=\{i\in E:n_i(u)=0\}.
+\end{equation}
+For a static state $n=(n_i)_{i\in E}$, we also write
+\begin{equation*}
+    U(n)=\{j\in E:n_j=1\},
+    \qquad
+    L(n)=\{i\in E:n_i=0\},
+    \qquad
+    x(n)=\mu(U(n)).
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Task influence field]
+\label{def:task-influence-field}
+The entry $K_{ij}$ is the influence strength from source node $j$ to target node $i$. The capability field on target node $i$ is the incoming-edge sum
+\begin{equation*}
+    h_i(n)=\sum_{j:j\to i}K_{ij}n_j=\sum_{j\in E}K_{ij}n_j.
+\end{equation*}
+\end{definition}
+
+
+When stating many-unit limits, we restore the index $N$: the objects above become $E_N$, $\mu^{(N)}$, $K^{(N)}$, $n^{(N)}(u)$, $x_N(u)$, $U_N(u)$, $L_N(u)$, and
+\begin{equation*}
+    \mu_N(A)=\sum_{i\in A}\mu_i^{(N)},
+    \qquad
+    x_N(u)=\sum_{i\in E_N}\mu_i^{(N)}n_i^{(N)}(u),
+    \qquad
+    h_i^{(N)}(u)=\sum_{j\in E_N}K_{ij}^{(N)}n_j^{(N)}(u).
+\end{equation*}
+For a static state $n\in\{0,1\}^{E_N}$, we write
+\begin{equation*}
+    U_N(n)=\{j\in E_N:n_j=1\},
+    \qquad
+    L_N(n)=\{i\in E_N:n_i=0\},
+    \qquad
+    x_N(n)=\mu_N(U_N(n)).
+\end{equation*}
+
+\subsection{Environment Learning as a Frontier Expansion Process}
+\label{subsec:single-task-frontier}
+
+With the latent graph and score measure fixed, we now turn the story into a process. The reason to use a frontier picture is that long-horizon environment learning is cumulative. In a software task, a runnable baseline makes later debugging meaningful; in a proof task, a lemma makes later proof obligations easier; in a scientific task, a calibrated model or validation loop makes later parameter search more useful. More generally, each partial success can become a tool for later progress.
+
+The graph model encodes which already-solved score units can help unlock which
+remaining ones. At log time \(u\), let
+\[
+    U(u)=\{j:n_j(u)=1\},\qquad L(u)=\{i:n_i(u)=0\}
+\]
+denote the unlocked and locked sets. A locked unit \(i\) can only become usable
+through influence arriving from units in \(U(u)\). Thus the relevant quantity is
+not the total amount of unlocked score, but the amount of influence crossing the
+frontier from \(U(u)\) into \(L(u)\).
+
+\underline{\textit{Probabilistic frontier expansion.}}
+For a locked score unit \(i\), its task field is given by \(h_i(u)=\sum_{j\in E}K_{ij}n_j(u)\). We turn the influence of the field into a continuous-time stochastic process
+by assuming that unit \(i\) unlocks with hazard proportional to its accumulated field:
+\[
+    \eta(1-n_i(u))h_i(u)
+    =
+    \eta(1-n_i(u))\sum_{j\in E}K_{ij}n_j(u),
+\]
+where \(\eta>0\) converts influence strength into progress per unit log time. Thus the field does not deterministically unlock \(i\); it determines the instantaneous probability that \(i\) unlocks. This is the sense in which learning expands the frontier: locked nodes become available at rates determined by the influence they receive from the currently unlocked side of the graph. We formalize this process in the definition below.
+
+\begin{definition}[Single-task frontier process]
+\label{def:single-task-frontier-process}
+Fix a finite task graph \(G_K=(E,\mathcal E_K)\), score weights \(\mu_i\),
+influence matrix \(K\), and conversion constant \(\eta>0\). The single-task
+frontier process is the continuous-time process on \(\{0,1\}^E\) in which, for
+each score unit \(i\), the instantaneous unlocking intensity is
+\begin{align}
+    \lambda_i(u) &:= \lim_{\Delta u\downarrow 0}
+    \frac{1}{\Delta u}
+    \Prob\left(n_i(u+\Delta u)-n_i(u)=1\mid n(u)\right) \nonumber
+    \\
+    & =
+    \eta(1-n_i(u))\sum_{j\in E}K_{ij}n_j(u) .
+    \label{eq:single-task-intensity-new}
+\end{align}
+Importantly, once a node unlocks, it remains unlocked.
+\end{definition}
+
+To express the resulting score growth, define for \(A,B\subseteq E\) the weighted
+frontier cut
+\[
+    C(A,B)=\sum_{i\in A}\sum_{j\in B}\mu_iK_{ij}.
+\]
+This is the total influence from sources in \(B\) to targets in \(A\), with each
+target weighted by the score gained if it unlocks. The active frontier at time
+\(u\) is therefore \(C(L(u),U(u))\).
+
+\begin{lemma}[Exact single-task frontier growth rate]
+\label{lem:exact-single-task-frontier-growth-new}
+For the single-task frontier process,
+\[
+    \frac{\mathrm{d}}{\mathrm{d}u}\E\bigl[x(u)\mid n(u)\bigr]
+    =
+    \eta C(L(u),U(u)).
+\]
+\end{lemma}
+
+\begin{proof}
+Fix \(u\) and condition on the state \(n(u)=n\). For \(i\in E\), let
+\(A_i(\Delta u)\) denote the event that node \(i\) unlocks during
+\([u,u+\Delta u]\). By the definition of the unlocking intensity,
+\[
+    \Pr(A_i(\Delta u)\mid n(u)=n)
+    =
+    \eta(1-n_i)\sum_{j\in E}K_{ij}n_j\,\Delta u
+    +o(\Delta u).
+\]
+Since \(E\) is finite, the probability of two or more unlocking events in
+\([u,u+\Delta u]\) is \(o(\Delta u)\). Therefore, to first order in
+\(\Delta u\), the expected score increment is obtained by summing the score
+gain from each possible single-node unlock:
+\begin{align*}
+    \E[x(u+\Delta u)-x(u)\mid n(u)=n]
+    &=
+    \sum_{i\in E}\mu_i\,
+    \Pr(A_i(\Delta u)\mid n(u)=n)
+    +o(\Delta u) \\
+    &=
+    \eta
+    \sum_{i\in E}
+    \mu_i(1-n_i)
+    \sum_{j\in E}K_{ij}n_j\,\Delta u
+    +o(\Delta u).
+\end{align*}
+Dividing by \(\Delta u\) and letting \(\Delta u\downarrow 0\) gives
+\[
+    \frac{\mathrm d}{\mathrm du}
+    \E[x(u)\mid n(u)=n]
+    =
+    \eta
+    \sum_{i\in E}
+    \mu_i(1-n_i)
+    \sum_{j\in E}K_{ij}n_j .
+\]
+Since \(1-n_i\) restricts the outer sum to \(i\in L(n)\), and \(n_j\) restricts
+the inner sum to \(j\in U(n)\), this becomes
+\[
+    \frac{\mathrm d}{\mathrm du}
+    \E[x(u)\mid n(u)=n]
+    =
+    \eta
+    \sum_{i\in L(n)}
+    \sum_{j\in U(n)}
+    \mu_iK_{ij}
+    =
+    \eta C(L(n),U(n)).
+\]
+This proves the claim.
+\end{proof}
+
+
+Lemma~\ref{lem:exact-single-task-frontier-growth-new} is the key reduction. It says that, to obtain a logistic expected growth rate, we do not need every microscopic edge weight to be identical. Instead, we need the boundary influence to depend mainly on two coarse quantities: the unlocked mass $\mu(U)$ and the locked mass $\mu(L)$. Then the field is roughly the product of the two: available reusable capability times remaining score opportunity.
+
+As the number of score units increases, the same fixed-resolution objects are now applied to the size-$N$ graph. In particular,
+\begin{equation*}
+    C_N(A,B)=\sum_{i\in A}\sum_{j\in B}\mu_i^{(N)}K_{ij}^{(N)},
+    \qquad A,B\subseteq E_N.
+\end{equation*}
+\underline{\textit{From frontier cuts to product frontiers.}}
+The remaining modeling question is when this boundary influence should look like a product of the two measures. The following quantity controls the deviation of the frontier process from the complete-mixing case.
+
+\begin{definition}[Single-task weighted cut error]
+\label{def:single-task-cut-error}
+Given $(E_N,\mu^{(N)},K^{(N)})$ and an arbitrary $\kappa>0$, define
+\begin{equation*}
+    \varepsilon_N(\kappa)=
+    \sup_{A,B\subseteq E_N}
+    \left|
+    \sum_{i\in A}\sum_{j\in B}
+    \mu_i^{(N)}\bigl(K_{ij}^{(N)}-\kappa\mu_j^{(N)}\bigr)
+    \right|.
+\end{equation*}
+\end{definition}
+
+\begin{condition}[Single-task weighted cut mixing]
+\label{cond:single-task-weighted-cut-mixing}
+There exists a \(\kappa > 0\) such that, as $N\to\infty$ for the task graph, the weighted cut error in Definition~\ref{def:single-task-cut-error} satisfies
+\begin{equation*}
+    \varepsilon_N\to0.
+\end{equation*}
+\end{condition}
+
+Weighted cut mixing is weaker than entrywise complete mixing. It does not say that each $K_{ij}^{(N)}$ is close to $\kappa\mu_j^{(N)}$. It says that, for every possible frontier, the aggregate capability crossing from unlocked graph nodes into locked graph nodes is close to the product-measure value.
+
+\begin{lemma}[Cut mixing gives logistic frontier growth rate]
+\label{lem:cut-mixing-logistic-growth}
+Under Condition~\ref{cond:single-task-weighted-cut-mixing}, the following holds for every static state $n\in\{0,1\}^{E_N}$. Let $U_N=U_N(n)$, $L_N=L_N(n)$, and $x_N=x_N(n)$. Then
+\begin{equation*}
+    \left|C_N(L_N,U_N)-\kappa x_N(1-x_N)\right|\le\varepsilon_N.
+\end{equation*}
+Consequently,
+\begin{equation*}
+    b_N(n)=\eta\kappa x_N(1-x_N)+r_N(n),
+    \qquad |r_N(n)|\le\eta\varepsilon_N.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+Apply Definition~\ref{def:single-task-cut-error} to $A=L_N$ and $B=U_N$. Since $\mu_N(U_N)=x_N$ and $\mu_N(L_N)=1-x_N$,
+\begin{align*}
+    \left|C_N(L_N,U_N)-\kappa x_N(1-x_N)\right|
+    &=
+    \left|
+    \sum_{i\in L_N}\sum_{j\in U_N}
+    \mu_i^{(N)}\bigl(K_{ij}^{(N)}-\kappa\mu_j^{(N)}\bigr)
+    \right| \\
+    &\le \varepsilon_N.
+\end{align*}
+The expected-growth-rate statement follows from Lemma~\ref{lem:exact-single-task-frontier-growth-new}.
+\end{proof}
+
+Cut mixing controls the deterministic expected growth rate. A separate condition controls the visible jump size. This distinction is crucial for the interpretation of the paper: a finite task with only a few large score units can follow the right frontier mechanism and still look very jagged.
+
+\begin{condition}[Small score units and controlled fields]
+\label{cond:single-task-small-units}
+Let
+\begin{equation*}
+    q_N=\sum_{i\in E_N}\bigl(\mu_i^{(N)}\bigr)^2.
+\end{equation*}
+Assume $q_N\to0$. Assume also that there is a deterministic $H_N$ such that
+\begin{equation*}
+    \sup_{i\in E_N,\,n\in\{0,1\}^{E_N}}\sum_{j\in E_N}K_{ij}^{(N)}n_j\le H_N,
+    \qquad
+    H_Nq_N\to0.
+\end{equation*}
+\end{condition}
+
+For equal score units, $q_N=1/N$. Thus Condition~\ref{cond:single-task-small-units} captures the smoothening process from a task with few bulky score units to a task with many small score units. The theorem below should be read exactly in that way. It is not a claim that the realized best-so-far curve of a finite benchmark task must be visually smooth. Rather, it says that if the same task-level mechanism were observed at increasingly fine score resolution, the staircase process would converge to a logistic frontier.
+
+\begin{theorem}[Single-task frontier, many-unit limit]
+\label{thm:single-task-frontier-limit-new}
+Consider the single-task frontier process of Definition~\ref{def:single-task-frontier-process}. Let $[u_0,u_1]$ be a compact log-time interval and let $x_0\in[0,1]$. Suppose Conditions~\ref{cond:single-task-weighted-cut-mixing} and~\ref{cond:single-task-small-units} hold, and suppose $x_N(u_0)\to x_0$. Then $x_N$ converges uniformly in probability on $[u_0,u_1]$ to the solution of
+\begin{equation}
+    \frac{dx}{du}=\eta\kappa x(1-x),
+    \qquad x(u_0)=x_0.
+    \label{eq:single-task-logistic-ode-new}
+\end{equation}
+If \(t_{\mathrm{mid}}\) is chosen so that the limiting midpoint satisfies $x(0)=1/2$, then, with $x(t):=x(\log(t/t_{\mathrm{mid}}))$, we obtain the log-sigmoid law:
+\begin{equation}
+    x_N \stackrel{P}{\longrightarrow}  
+    x(t)=\frac{1}{1+(t_{\mathrm{mid}}/t)^\beta},
+    \qquad
+    \beta=\eta\kappa.
+    \label{eq:single-task-logsigmoid-limit-new}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $M_N(u)$ denote the martingale increment in the Doob-Meyer decomposition, normalized so that $M_N(u_0)=0$. The Doob-Meyer decomposition and Lemma~\ref{lem:cut-mixing-logistic-growth} give, for $u\in[u_0,u_1]$,
+\begin{equation}
+    x_N(u)=x_N(u_0)+M_N(u)+\eta\kappa\int_{u_0}^{u}x_N(s)(1-x_N(s))\,ds+R_N(u),
+    \label{eq:single-task-doob-meyer-new}
+\end{equation}
+where
+\begin{equation*}
+    \sup_{u\in[u_0,u_1]}|R_N(u)|\le \eta(u_1-u_0)\varepsilon_N.
+\end{equation*}
+
+A jump of unit $i$ changes $x_N$ by $\mu_i^{(N)}$. The predictable quadratic variation accumulated over the interval $[u_0,u_1]$ is therefore bounded by
+\begin{equation*}
+    \langle M_N\rangle_{[u_0,u_1]}
+    =\int_{u_0}^{u_1}\sum_{i\in E_N}\bigl(\mu_i^{(N)}\bigr)^2
+      \eta\bigl(1-n_i^{(N)}(s)\bigr)\sum_{j\in E_N}K_{ij}^{(N)}n_j^{(N)}(s)\,ds
+    \le
+    \eta(u_1-u_0)H_Nq_N.
+\end{equation*}
+Doob's $L^2$ inequality therefore yields
+\begin{equation*}
+    \E\left[\sup_{u\in[u_0,u_1]}|M_N(u)|^2\right]
+    \le 4\eta(u_1-u_0)H_Nq_N\to0.
+\end{equation*}
+Thus the martingale term vanishes uniformly in probability.
+
+Let $f(x)=\eta\kappa x(1-x)$. On $[0,1]$, $f$ is Lipschitz with constant at most $\eta\kappa$. Comparing \eqref{eq:single-task-doob-meyer-new} with the integral equation for \eqref{eq:single-task-logistic-ode-new} gives
+\begin{align*}
+    \sup_{u_0\le r\le u}|x_N(r)-x(r)|
+    &\le |x_N(u_0)-x_0|+
+      \sup_{u_0\le r\le u}|M_N(r)|
+      +\eta(u_1-u_0)\varepsilon_N  \\
+    &\quad+\eta\kappa\int_{u_0}^{u}\sup_{u_0\le r\le s}|x_N(r)-x(r)|\,ds.
+\end{align*}
+Gronwall's inequality proves uniform convergence in probability on $[u_0,u_1]$. Solving \eqref{eq:single-task-logistic-ode-new} and setting $x(0)=1/2$ gives \eqref{eq:single-task-logsigmoid-limit-new}.
+\end{proof}
+
+\begin{readingbox}{Interpreting the single-task curve shapes}
+For finite $N$, the task score is still a jagged jump process. The theorem says that a smooth logistic curve appears only after two effects become negligible: mixing cut error $\varepsilon_N \to 0$ and jump noise from large score units \(H_Nq_N \to 0\). Thus a jagged finite-task curve is compatible with the logistic frontier mechanism. Moreover, the growth-rate $x(1-x)$ has a direct interpretation: unlocked score measure $x$ supplies capability to help unlock new score, while locked score measure $1-x$ delimits the remaining opportunities for score improvement. In the next subsection, we explain why averaging many such finite-task curves is the natural place to expect a clean scaling law.
+\end{readingbox}
+
+
+\subsection{Many-task Aggregation Reveals the Smooth Log-Sigmoid Law}
+\label{subsec:aggregate-frontier-limit}
+
+We now return to the quantity fit in the benchmark: the average over many independently evaluated tasks. As we have observed empirically, the per-task curves are heterogeneous and often visibly jagged, while the cross-task averages are much smoother and become better fit by the log-sigmoid as more tasks are included. In our language, each task is its own finite frontier expansion process on a task-specific task graph. The aggregate theorem therefore answers the central question: 
+\begin{center}
+    \emph{How can many jagged task curves produce a clean log-sigmoid scaling law after task averaging?}    
+\end{center}
+
+The answer has two layers. First, because different task environments do not interact with each other, each task can have its own approximate logistic frontier. Second, the benchmark average removes finite-task roughness and becomes a single log-sigmoid when the task midpoints and task speeds are sufficiently concentrated in the many-task limit.
+
+
+Moving from a single task to a full benchmark introduces three additional sources of variation.
+
+\begin{itemize}
+    \item \textbf{Task-level logistic frontier dynamics.} Each task has its own task graph, score atoms, influence matrix, cut error, and finite-jump noise. These quantities determine how closely that task's frontier expansion follows its own logistic limit.
+
+    \item \textbf{Time-axis alignment.} Each task may have its own model-dependent midpoint $t_{\mathrm{mid},b}$. A benchmark-level fit, however, has only one common midpoint $t_{\mathrm{mid}}$. Therefore the task-specific midpoint shifts must concentrate across tasks.
+
+    \item \textbf{Learning-speed homogeneity.} Each task may also have its own frontier speed $\beta_b$. A benchmark-level fit uses one common speed $\beta$, so the model-dependent task learning speeds must concentrate around a shared value.
+\end{itemize}
+
+The aggregate theorem says that the log-sigmoid law appears as a population-level limit: finite-task roughness is washed out by averaging, and the remaining task-level logistic frontiers combine into a single curve when their midpoints and speeds are sufficiently aligned.
+
+
+\begin{definition}[Benchmark task graph and state]
+\label{def:benchmark-task-graph-state}
+For a benchmark with $M$ tasks, the tasks are indexed by $b=1,\ldots,M$. Task $b$ has its own task graph
+\begin{equation*}
+    G_b=(E_b,\mathcal E_b),
+    \qquad
+    \mathcal E_b=\{j\to i:K_{ij}^b>0\},
+\end{equation*}
+where $E_b$ is the task's visible score-unit node set for the model being evaluated. It has normalized score measurees $\mu_i^b$ for $i\in E_b$, influence matrix $K^b=(K_{ij}^b)_{i,j\in E_b}$, and field-to-progress conversion constant $\eta_b>0$.
+
+The state vector of task $b$ is
+\begin{equation*}
+    n^b(u)=(n_i^b(u))_{i\in E_b},
+\end{equation*}
+and the capability field on node $i$ is
+\begin{equation*}
+    h_i^b(u)=\sum_{j\in E_b}K_{ij}^b n_j^b(u).
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Task score and benchmark average]
+\label{def:benchmark-task-score-average}
+The normalized score of task $b$ at log-time $u$ is
+\begin{equation*}
+    x_b(u)=\sum_{i\in E_b}\mu_i^b n_i^b(u).
+\end{equation*}
+And the benchmark-average normalized score is
+\begin{equation*}
+    x_B(u)=\frac1M\sum_{b=1}^{M}x_b(u).
+\end{equation*}
+Here \(u = \log t - \log t_{\mathrm{mid}}\) is the log-time coordinate. For raw time, we denote the normalized score and benchmark score by 
+\[ 
+x_B^\dagger(t)=x_B(\log(t/t_{\mathrm{mid}})),\qquad S_B(t)=S_{\max} \cdot x_B^\dagger(t),
+\] 
+where \(t_{\mathrm{mid}}\) is the fitted aggregate midpoint and \(S_{\max}\) denotes the fitted aggregate ceiling. Individual tasks may have residual midpoint shifts relative to this common coordinate, introduced below as \(\delta_b\) in \eqref{eq:task-specific-logistic}.
+\end{definition}
+
+
+\begin{definition}[Task-specific logistic frontier]
+\label{def:task-specific-logistic-frontier}
+In the benchmark-level log-time coordinate \(u\), task \(b\) is assigned a task-specific frontier speed \(\beta_b\ge0\) and a residual midpoint shift \(\delta_b\in\mathbb R\). The corresponding task-specific logistic curve is
+\begin{equation}
+    \ell_b(u)=
+    \frac{1}{1+e^{-\beta_b(u-\delta_b)}}.
+    \label{eq:task-specific-logistic}
+\end{equation}
+Here \(\beta_b\) controls the speed of task-level frontier propagation, while \(\delta_b\) measures the task midpoint relative to the benchmark-level midpoint \(t_{\mathrm{mid}}\). Thus \(\delta_b=0\) means that task \(b\)'s midpoint is aligned with the aggregate midpoint.
+\end{definition}
+
+The first condition applies the single-task cut-mixing argument inside each task graph. It is written for the influence matrix $\eta_bK^b$, so the product-frontier coefficient is directly $\beta_b$.
+
+\begin{definition}[Blockwise weighted cut error and field bound]
+\label{def:blockwise-error-granularity}
+For each task $b$, define the task-conditioned weighted cut error by
+\begin{equation}
+    \varepsilon_b=
+    \sup_{A,B\subseteq E_b}
+    \left|
+    \sum_{i\in A}\sum_{j\in B}
+    \mu_i^b\bigl(\eta_bK_{ij}^b-\beta_b\mu_j^b\bigr)
+    \right|.
+    \label{eq:blockwise-epsilon-new}
+\end{equation}
+Define the block granularity and score-growth field bound by
+\begin{equation*}
+    q_b=\sum_{i\in E_b}(\mu_i^b)^2,
+    \qquad
+    H_b=\sup_{i\in E_b,\,n\in\{0,1\}^{E_b}}
+    \eta_b\sum_{j\in E_b}K_{ij}^b n_j.
+\end{equation*}
+\end{definition}
+
+\begin{condition}[Blockwise weighted cut mixing and vanishing score units]
+\label{cond:blockwise-cut-mixing}
+Assume that task speeds are uniformly bounded,
+\begin{equation*}
+    0\le\beta_b\le\beta_+<\infty,
+\end{equation*}
+and that the average task cut error and granularity error vanish:
+\begin{equation}
+    \Delta_M=\frac1M\sum_{b=1}^{M}\varepsilon_b\to0,
+    \qquad
+    A_M=\frac1M\sum_{b=1}^{M}\sqrt{H_b q_b}\to0
+    \label{eq:blockwise-errors-new}
+\end{equation}
+in probability.
+\end{condition}
+
+The next condition asks the initial value variation is negligible across different tasks in the benchmark.
+
+\begin{condition}[Blockwise initial alignment]
+    \label{cond:blockwise-initial-alignment}
+    We assume the average initial value of the dynamics is aligned,
+    \[
+        \frac{1}{M}\sum_{b=1}^M |x_b(u_0)-\ell_b(u_0)| \stackrel{P}{\longrightarrow} 0.
+    \]
+\end{condition}
+
+Condition~\ref{cond:blockwise-cut-mixing} has a direct consequence: the observed benchmark trajectory is close to an average of task-specific logistic frontiers. Notice the averaging in the condition. We do not require every task to look smooth on its own, but the \emph{average} contribution of cut errors, score units, and jumps to vanish. This is the formal version of the empirical claim that a population of jagged frontier expansion processes can reveal a smooth law. For the compact interval \(I \subseteq \mathbb{R}\), define the following blockwise trajectory error supremum:
+\begin{equation}
+    R_M(I):=\frac1M\sum_{b=1}^{M}\sup_{u\in I}|x_b(u)-\ell_b(u)|.
+    \label{eq:R-M-new}
+\end{equation}
+
+Then we have the following lemma that proves its vanishing property.
+
+\begin{lemma}[Average error supremum, many-task limit]
+\label{lem:average-task-logistic-approx}
+Under Conditions~\ref{cond:blockwise-cut-mixing} and~\ref{cond:blockwise-initial-alignment}, $R_M(I)\stackrel{P}{\to} 0$ as \(M \to \infty\) for any compact interval $I \subseteq \mathbb{R}$. 
+\end{lemma}
+
+\begin{proof}
+For task $b$, the same Doob-Meyer decomposition as in the single-task proof gives
+\begin{equation}
+    x_b(u)=x_b(u_0)+M_b(u)+\int_{u_0}^{u}\left\{\beta_b x_b(s)(1-x_b(s))+\rho_b(s)\right\}\,ds,
+    \label{eq:blockwise-doob-meyer-new}
+\end{equation}
+where $M_b$ is a martingale and, by \eqref{eq:blockwise-epsilon-new}, $|\rho_b(s)|\le\varepsilon_b$ for all states. The task-level curve \eqref{eq:task-specific-logistic} solves
+\begin{equation*}
+    \frac{\mathrm{d}\ell_b}{\mathrm{d}u}=\beta_b\ell_b(1-\ell_b).
+\end{equation*}
+Since $z\mapsto \beta_b z(1-z)$ is Lipschitz on $[0,1]$ with constant at most $\beta_+$, Gronwall's inequality applied to \eqref{eq:blockwise-doob-meyer-new} yields
+\begin{equation}
+    \sup_{u\in I}|x_b(u)-\ell_b(u)|
+    \le
+    e^{\beta_+|I|}
+    \left(
+      |x_b(u_0)-\ell_b(u_0)|+
+      \sup_{u\in I}|M_b(u)|+
+      |I|\varepsilon_b
+    \right),
+    \label{eq:blockwise-gronwall-new}
+\end{equation}
+where $|I|=u_1-u_0$. 
+
+The first term converges to zero by Condition~\ref{cond:blockwise-initial-alignment}. The third term as well by Condition~\ref{cond:blockwise-cut-mixing}. It remains to average the martingale terms. A jump of unit $i$ in task $b$ changes $x_b$ by $\mu_i^b$, and the total score-growth field is bounded by $H_b$. Hence the predictable quadratic variation of \(M_b\) can be bounded by
+\begin{equation*}
+    \langle M_b\rangle_{I}\le |I|H_b q_b.
+\end{equation*}
+Doob's $L^2$ inequality gives the conditional bound
+\begin{equation}
+    \E\left[\sup_{u\in I}|M_b(u)|\,\middle|\,\mathcal G_M\right]
+    \le 2\sqrt{|I|H_b q_b},
+    \label{eq:blockwise-martingale-conditional-new}
+\end{equation}
+where $\mathcal G_M$ denotes the task-level weights and influence matrices. This conditional form is useful because $A_M$ may itself be random. Let
+\begin{equation*}
+    Z_M=\frac1M\sum_{b=1}^{M}\sup_{u\in I}|M_b(u)|.
+\end{equation*}
+For any $\varepsilon>0$ and $a>0$, \eqref{eq:blockwise-martingale-conditional-new} implies
+\begin{align*}
+    \Prob(Z_M>\varepsilon)
+    &\le \Prob(A_M>a)+\Prob(Z_M>\varepsilon,\,A_M\le a) \\
+    &\le \Prob(A_M>a)+\varepsilon^{-1}\E[Z_M\1\{A_M\le a\}] \\
+    &\le \Prob(A_M>a)+\frac{2\sqrt{|I|}\,a}{\varepsilon}.
+\end{align*}
+Since $A_M\to0$ in probability, first let $M\to\infty$ and then let $a\downarrow0$ to obtain $Z_M\to0$ in probability. Averaging \eqref{eq:blockwise-gronwall-new} over $b$ and using \eqref{eq:blockwise-errors-new} proves \eqref{eq:R-M-new}.
+\end{proof}
+
+The next two task-distributional assumptions serve to align the scaling curves within the benchmark. They are not consequences of blockwise cut mixing. They are what turns an average of task-level sigmoids into a single benchmark sigmoid.
+
+\begin{assumption}[Uniform log-time bias]
+\label{assum:uniform-log-time-bias}
+There is a single benchmark-level midpoint \(t_{\mathrm{mid}}\) such that the residual task shifts in \eqref{eq:task-specific-logistic} satisfy
+\begin{equation*}
+    D_M=\frac1M\sum_{b=1}^{M}|\delta_b|\to0.
+\end{equation*}
+The strict uniform-bias case is $\delta_b\equiv0$.
+\end{assumption}
+
+\begin{assumption}[Concentrated environment learning speed]
+\label{assum:concentrated-speed}
+There is a scalar $\beta>0$ such that
+\begin{equation*}
+    B_M=\frac1M\sum_{b=1}^{M}|\beta_b-\beta|\to0.
+\end{equation*}
+In particular, $M^{-1}\sum_{b=1}^{M}\beta_b\to\beta$.
+\end{assumption}
+
+The reason these assumptions are necessary can be seen from the aggregated frontier. Averaging removes jaggedness, but it does not by itself align task difficulty or environment learning speed. When blockwise cut mixing error tends to zero, the leading expected growth rate is
+\begin{equation*}
+    \frac1M\sum_{b=1}^{M}\beta_b x_b(u)(1-x_b(u)).
+\end{equation*}
+This becomes $\beta x_B(1-x_B)$ only if tasks are aligned enough that the task scores and speeds behave like one population. Even when all speeds are equal, persistent task dispersion subtracts from the scalar frontier through
+\begin{equation*}
+    \frac1M\sum_{b=1}^{M}x_b(1-x_b)
+    =x_B(1-x_B)-\frac1M\sum_{b=1}^{M}(x_b-x_B)^2.
+\end{equation*}
+The theorem below proves the core convergence once the blockwise frontier condition, midpoint alignment, and speed concentration are in place.
+
+
+\begin{theorem}[Benchmark aggregate produces the log-sigmoid law in the many-task limit]
+\label{thm:aggregate-logsigmoid-frontier-limit-new}
+Fix a compact log-time interval \(I \subseteq \mathbb{R}\). Suppose Conditions~\ref{cond:blockwise-cut-mixing}-\ref{cond:blockwise-initial-alignment}, Assumptions~\ref{assum:uniform-log-time-bias}-\ref{assum:concentrated-speed} hold for some \(t_{\mathrm{mid}} > 0\) and \(\beta > 0\). Then 
+\[
+    x_B(u) \stackrel{P}{\to} \ell_\beta(u), \quad \forall u \in I.
+\]
+Equivalently, for raw times \(t\) whose log coordinate \(u=\log(t/t_{\mathrm{mid}})\) lies in \(I\), using the notation from Definition~\ref{def:benchmark-task-score-average}, we have
+\begin{equation}
+    x_B^\dagger(t) = \frac{S_B(t)}{S_{\max}}\stackrel{P}{\longrightarrow}
+    \frac{1}{1+(t_{\mathrm{mid}}/t)^\beta}.
+    \label{eq:aggregate-raw-time-law-new}
+\end{equation}
+\end{theorem}
+
+
+\begin{proof}
+We prove the statement for the normalized score \(x_B(u)\). Multiplication by a fixed fitted ceiling $S_{\max}$ gives the raw-score statement.
+
+\emph{Step 1: replace observed task trajectories by task-level frontier limits.} By Lemma~\ref{lem:average-task-logistic-approx},
+\begin{equation}
+    \sup_{u\in I}\left|x_B(u)-\frac1M\sum_{b=1}^{M}\ell_b(u)\right|
+    \le
+    \frac1M\sum_{b=1}^{M}\sup_{u\in I}|x_b(u)-\ell_b(u)|
+    =R_M(I)\to0
+    \label{eq:aggregate-proof-step-one-new}
+\end{equation}
+in probability.
+
+\emph{Step 2: align the task-level frontiers to the benchmark frontier.} Since the logistic link satisfies $|\sigmoid'(z)|\le1/4$ for all $z$, writing \(\ell_\beta(u) = \sigmoid(\beta u)\), we have
+\begin{align}
+    \sup_{u\in I}|\ell_b(u)-\ell_\beta(u)|
+    &\le
+    \frac14\sup_{u\in I}
+    \left|\beta_b(u-\delta_b)-\beta u\right| \notag\\
+    &\le
+    \frac14\left(\sup_{u\in I}|u|\,|\beta_b-\beta|+\beta_b|\delta_b|\right).
+    \label{eq:aggregate-lipschitz-new}
+\end{align}
+The uniform speed bound in Condition~\ref{cond:blockwise-cut-mixing} gives $\beta_b|\delta_b|\le \beta_+|\delta_b|$. Averaging \eqref{eq:aggregate-lipschitz-new} over tasks and using Assumptions~\ref{assum:uniform-log-time-bias} and~\ref{assum:concentrated-speed},
+\begin{equation}
+    \frac1M\sum_{b=1}^{M}\sup_{u\in I}|\ell_b(u)-\ell_\beta(u)|
+    \le
+    \frac14\left(\sup_{u\in I}|u|\,B_M+\beta_+D_M\right)
+    \to0.
+    \label{eq:aggregate-proof-step-two-new}
+\end{equation}
+
+\emph{Step 3: combine the two approximations.} The triangle inequality gives
+\begin{align*}
+    \sup_{u\in I}|x_B(u)-\ell_\beta(u)|
+    &\le
+    \sup_{u\in I}\left|x_B(u)-\frac1M\sum_{b=1}^{M}\ell_b(u)\right| \\
+    &\quad +
+    \frac1M\sum_{b=1}^{M}\sup_{u\in I}|\ell_b(u)-\ell_\beta(u)|.
+\end{align*}
+The first term converges to zero by \eqref{eq:aggregate-proof-step-one-new}; the second converges to zero by \eqref{eq:aggregate-proof-step-two-new}. This proves uniform convergence in probability of $x_B$ to $\ell_\beta$ on $I$. Substituting $u=\log(t/t_{\mathrm{mid}})$ gives \eqref{eq:aggregate-raw-time-law-new}.
+\end{proof}
+
+\begin{readingbox}{How does the benchmark aggregate produce the empirical scaling law}
+This is the theorem that corresponds to the empirical scaling law. The aggregate averages many frontier expansion processes on task-specific graphs to produce an emergent smooth curve in the many-task limit. For the convergence to hold, we need blockwise cut mixing that ensures task-level product frontier growth rates, the small-score-unit condition that makes jump noise vanish in the aggregate, and the midpoint and speed assumptions that prevent a mixture of incompatible sigmoids. Under these conditions, the benchmark average can finally converges to a single log-sigmoid law in \eqref{eq:aggregate-raw-time-law-new}, instead of being merely S-shaped.
+\end{readingbox}
+
+
+\subsection{Graph Self-similarity Induces Log Scale for Time Axis}
+\label{subsec:self-similar-log-time}
+
+The previous subsections explain why frontier expansion gives logistic dynamics once progress is measured in an effective learning coordinate. We now explain why this coordinate should often be logarithmic in raw interaction time.
+
+Recall that the frontier process already takes place on the model-conditioned task graph \(G_K=(E,\mathcal E_K)\). An edge \(j\to i\) exists means that an unlocked source node \(j\) can help unlock a target node \(i\), with field strength (marginal improvement in scores) \(K_{ij}\). The weighted cut \(C(L,U)\) measures the total influence crossing from the unlocked set \(U\) to the locked set \(L\).
+
+The remaining question is how raw interaction time moves the agent through the latent task graph. The answer we propose is graph-dependent and geometric: harder regions of the task graph require more search effort to expose. If this search geometry is approximately self-similar across difficulty scales, then equal additive increases in difficulty require multiplicative increases in raw time. This is why the natural frontier coordinate becomes \(\log t\).
+
+\begin{definition}[Difficulty scale on task-graph edges]
+\label{def:edge-difficulty-scale}
+For each influence edge \(j\to i\in\mathcal E_K\), let
+\[
+    \rho_{ij}\ge0
+\]
+be the difficulty scale of that edge. Smaller \(\rho_{ij}\) means that the influence from \(j\) to \(i\) becomes usable at lower search effort; larger \(\rho_{ij}\) means that the influence requires deeper search or longer interaction to become usable.
+
+For \(r\ge0\), define the exposed influence matrix
+\[
+    K^{(\le r)}_{ij}
+    =
+    \begin{cases}
+        K_{ij}, & \text{if } j\to i\in\mathcal E_K \text{ and } \rho_{ij}\le r,\\
+        0, & \text{otherwise.}
+    \end{cases}
+\]
+The corresponding exposed field is
+\[
+    h_i^{(\le r)}(n)
+    =
+    \sum_{j\in E}K^{(\le r)}_{ij}n_j .
+\]
+\end{definition}
+
+Increasing \(r\) reveals more of the same task graph. At small \(r\), only low-difficulty edges contribute to the field. At larger \(r\), higher-difficulty edges also contribute to the frontier cut. Thus \(r\) is an effective coordinate for how much of the task graph has become usable.
+
+\begin{definition}[Search volume at difficulty scale]
+\label{def:search-volume-scale}
+Let \(k\in \mathbb{N}^+\) index difficulty levels, with level \(k\) corresponding to the scale band \([k\Delta r,(k+1)\Delta r)\) where \(\Delta r>0\). Define the set of task-graph edges at level \(k\) by
+\[
+    \mathcal E_k
+    =
+    \{j\to i\in\mathcal E_K:
+    k\Delta r\le \rho_{ij} < (k+1)\Delta r\}.
+\]
+Let \(N_k=|\mathcal E_k|\) be the number of edges whose difficulty lies in this scale band. We interpret \(N_k\) as a discrete proxy of search-volume: it counts how much edge structure must be exposed at difficulty level \(k\).
+\end{definition}
+
+Search volume is different from score measure. score measure \(\mu\) measures how much benchmark value is obtained once nodes are unlocked. Search volume measures how much task-graph structure must become usable before the corresponding frontier influence can appear.
+
+\begin{assumption}[Self-similar task-graph edge growth]
+\label{ass:self-similar-edge-growth}
+There exist constants \(b>1\) and \(c_-,c_+>0\) such that, throughout the scale range of interest,
+\[
+    c_- b^k
+    \le
+    N_k
+    \le
+    c_+ b^k .
+\]
+\end{assumption}
+
+This assumption says that each additive increase in difficulty level multiplies the amount of relevant task-graph edge structure by a factor comparable to \(b\). Since level \(k\) corresponds to scale \(r_k=k\Delta r\), this means
+\[
+    N_k
+    \asymp
+    b^{r_k/\Delta r}
+    =
+    \exp\left(\frac{\log b}{\Delta r}r_k\right).
+\]
+We write
+\[
+    h=\frac{\log b}{\Delta r}
+\]
+for the corresponding search-entropy parameter. Informally, \(h\) measures how quickly the amount of task-graph structure grows as difficulty scale increases.
+
+The discrete assumption motivates the continuum approximation
+\[
+    V(r)=V_0e^{hr},
+    \qquad V_0>0,
+\]
+where \(V(r)\,\mathrm dr\) is the search effort needed to expose the task-graph edge structure in the difficulty band \([r,r+\mathrm dr]\). Hence the cumulative search volume up to difficulty scale \(r\) is
+\[
+    \mathcal V(r)
+    =
+    \int_0^r V(s)\,\mathrm ds
+    =
+    \frac{V_0}{h}(e^{hr}-1).
+\]
+
+\begin{assumption}[Linear search-effort supply]
+\label{ass:linear-search-effort-supply}
+Let \(A(t)\) be the cumulative search effort supplied by raw interaction time \(t\). Assume
+\[
+    A(t)=\nu t
+\]
+for some \(\nu>0\).
+\end{assumption}
+
+This assumption says that raw interaction time is proportional to available search effort. The search may be adaptive, but one unit of raw time does not by itself expose exponentially many edges of the task graph.
+
+\begin{proposition}[Self-similar task geometry gives logarithmic time]
+\label{prop:self-similar-log-time}
+Under Assumptions~\ref{ass:self-similar-edge-growth} and~\ref{ass:linear-search-effort-supply}, the difficulty scale exposed by raw time \(t\) satisfies
+\[
+    r(t)
+    =
+    \frac1h
+    \log\left(1+\frac{h\nu}{V_0}t\right).
+\]
+In particular, in the scale-free regime \(t\gg V_0/(h\nu)\),
+\[
+    r(t)=\frac1h\log t+O(1).
+\]
+\end{proposition}
+
+The proposition is just the inversion of cumulative search volume. The scale \(r(t)\) is defined by \(\mathcal V(r(t))=A(t)\). Since \(\mathcal V(r)\) grows exponentially in \(r\) while \(A(t)\) grows linearly in \(t\), the exposed difficulty scale grows logarithmically in raw time.
+
+\underline{\textit{Connection to the frontier law.}}
+The earlier frontier law describes score growth once progress is measured in the coordinate that makes task-graph influence usable. Here that coordinate is \(r\). As \(r\) increases, more entries of \(K\) are exposed through \(K^{(\le r)}\), the field \(h_i^{(\le r)}\) grows, and the frontier cut from unlocked nodes to locked nodes expands through the same mechanism as before.
+
+If the exposed task graph is approximately weighted cut-mixed at each scale, with a scale-stationary effective frontier coefficient, then the coarse frontier dynamics in the scale coordinate take the product form
+\[
+    \frac{\mathrm dx}{\mathrm dr}
+    =
+    \gamma x(1-x),
+\]
+where \(\gamma>0\) is the frontier speed per unit difficulty scale. This is the earlier weighted-cut frontier mechanism written in the coordinate \(r\).
+
+Since \(r(t)=h^{-1}\log t+O(1)\) in the scale-free regime, a unit increase in \(\log t\) corresponds to approximately \(1/h\) units of difficulty-scale progress. Therefore
+\[
+    \frac{\mathrm dx}{\mathrm d\log t}
+    =
+    \frac{\gamma}{h}x(1-x).
+\]
+Thus the fitted log-time frontier speed is
+\[
+    \beta=\frac{\gamma}{h}.
+\]
+Solving the log-time logistic equation gives
+\[
+    x(t)
+    =
+    \frac{1}{1+(t_{\mathrm{mid}}/t)^\beta}.
+\]
+
+\begin{readingbox}{Why self-similar task geometry gives log time}
+The weighted-cut argument explains the frontier factor \(x(1-x)\), as previously shown. Self-similar task-graph geometry explains why the time coordinate is measured by log scale. If each additive increase in difficulty scale multiplies the number of relevant task-graph edges by a factor \(b\), then search volume grows like \(e^{hr}\), where \(h=(\log b)/\Delta r\). Since raw interaction time supplies only \(O(t)\) search effort, the exposed difficulty scale satisfies \(r(t)=h^{-1}\log t+O(1)\). Therefore a logistic frontier law in task-graph scale becomes a logistic law in \(\log t\).
+\end{readingbox}
+
+\subsection{Discussion and Limitations}
+\label{subsec:theory-discussion-limitations}
+
+The derivation above gives a sufficient mechanism for the empirical log-sigmoid law. Its assumptions are useful precisely because they identify concrete ways in which the log-sigmoid limit can fail. We therefore treat it as a mechanistic account of the observed regime rather than a claim that all environment-learning curves must be logistic.
+
+\paragraph{Finite score granularity.}
+The single-task theory allows finite tasks to remain visibly jagged. Real tasks may contain a few large hidden tests, decisive proof obligations, or high-weight rubric cells. When such score units remain macroscopic, the martingale error term need not vanish for that task, and the realized best-so-far curve can exhibit long plateaus followed by sudden jumps. The aggregate theorem only requires that such coarse units do not dominate the benchmark average. If a non-negligible fraction of benchmark score measure is carried by coarse tasks, the aggregate curve may retain visible jumps or large run-to-run variance even when the average drift is approximately logistic.
+
+\paragraph{Weighted cut mixing.}
+Weighted cut mixing is the core condition of the scaling law. It says that every macroscopic unlocked--locked frontier cut sees approximately product-measure influence. If the task graph has persistent bottlenecks, modules, prerequisite chains, or separated high-transfer and low-transfer regions, then the frontier remembers where it is in the graph, not only how much score measure has been unlocked. In that case, the natural limit is no longer a one-dimensional logistic equation. One should instead expect multi-type dynamics, delayed takeoff, multiple inflection regions, long plateaus, or a sum of sigmoids corresponding to different task modules.
+
+\paragraph{Attainable support and the fitted ceiling.}
+The analysis treats \(S_{\max}\) as the stable score measure of an effective reachable support. This is appropriate when the set of practically attainable score units is fixed over the fitted time window. However, if longer interaction changes what is effectively reachable---for example, if weak transfer routes become usable only at much longer horizons---then the denominator of the normalized score is itself moving. A short-window fit may still provide a useful effective ceiling, but that ceiling should not be interpreted as an indefinite upper bound.
+
+\paragraph{Task midpoint alignment.}
+The aggregate theorem assumes that a single benchmark-level midpoint removes most task-level log-time bias. If residual midpoint shifts \(\delta_b\) remain widely dispersed, the benchmark average becomes a convolution of shifted task frontiers. Such a curve may still be smooth and S-shaped, but it need not satisfy the scalar logistic ODE. In this regime, the fitted midpoint and slope are window-dependent summaries of the task-midpoint distribution rather than intrinsic benchmark constants.
+
+\paragraph{Learning-speed concentration.}
+The aggregate theorem also assumes that task frontier speeds concentrate around a common value. If some task families have persistently steep frontiers while others have persistently shallow frontiers, then the average of task-level sigmoids is generally not itself a sigmoid. Early progress may be dominated by fast tasks, while later progress may be governed by slower tasks. A single fitted \(\beta\) may therefore reflect task-family composition rather than a true scalar environment-learning speed.
+
+\paragraph{Choice of time coordinate.}
+The log-time coordinate is justified by the graph self-similarity hypothesis in which unit increments of difficulty require multiplicative increases in search effort. Some environments, however, have characteristic raw-time cycles: fixed evaluation delays, daily data refreshes, hard deadlines, staged curricula, or batch feedback. In such cases, another time coordinate, or a piecewise time model, may be more appropriate than a single log-time transformation.
+
+Together, these limitations clarify the scope of the proof. The appendix gives one route from frontier expansion to the observed population-level log-sigmoid law. A fuller theory would classify the non-logistic limits produced by coarse score units, non-mixing graphs, moving attainable supports, dispersed midpoints, heterogeneous learning speeds, and non-scale-free feedback schedules.

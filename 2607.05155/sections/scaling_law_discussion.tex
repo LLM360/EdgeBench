@@ -1,0 +1,78 @@
+\section{More Discussion on the Scaling Law Shapes}
+\label{sec:scaling-law-discussion}
+\label{sec:scurve-mechanistic-reading}
+
+\underline{\textit{A mechanistic reading selects the log-sigmoid.}}
+Because the candidate S-curves fit almost equally well
+(Table~\ref{tab:scurve-family-comparison}; the log-sigmoid/log-probit degeneracy
+has been known since Berkson~\citep{berkson1944application}), the choice cannot
+rest on fit; we make it on mechanism. Written as a growth law for the normalized
+score $y=S/S_{\max}$, each candidate's rate makes a different statement about
+what drives progress and what limits it.
+\begin{itemize}
+  \item \textbf{Log-sigmoid:} $\frac{dy}{d\tau}=\beta\,y(1-y)$ in log time
+  $\tau=\ln t$. The detailed derivation is given in
+  Section~\ref{sec:why-log-sigmoid} and Appendix~\ref{sec:theory}; here the key
+  mechanistic reading is that \(y\) is the unlocked attainable score mass and
+  \(1-y\) is the remaining locked score mass. If the aggregate influence crossing
+  the unlocked--locked frontier is approximately proportional to the product of
+  these masses, then progress follows \(y(1-y)\). The log-time coordinate comes
+  from the self-similar search geometry of the task graph. This reading is
+  consistent with two empirical checks: Section~\ref{sec:stateful-stateless-analysis}
+  shows that continuous stateful runs outperform equal-budget repeated sampling,
+  so progress is not explained by independent attempts alone; and
+  Section~\ref{sec:case-study} shows a finite task advancing through sparse but
+  cumulative breakthroughs, where an early working pipeline makes later repairs
+  searchable. Inflection occurs at \(y=0.5\) (symmetric).
+
+  \item \textbf{Log-Gompertz:} $\frac{dy}{d\tau}=c\,y\ln(1/y)$. The
+  $\ln(1/y)$ term is the signature of an engine that winds down
+  multiplicatively as the system matures (e.g., tumour growth, where the
+  proliferating fraction shrinks). It is front-loaded, with inflection at
+  $y=1/e\approx0.37$: the relative growth rate diverges as $y\to0$, so a tiny
+  system grows explosively because the limitation it will eventually hit does
+  not yet exist. Experience acquisition is the opposite---its early phase is
+  \emph{slow} because a foothold must first be bootstrapped, not fast for lack
+  of a brake.
+
+  \item \textbf{Log-Probit:} $\frac{dy}{d\tau}=\frac{1}{\sigma}\,
+  \varphi\!\big(\Phi^{-1}(y)\big)$, a sweep across a \emph{log-normal}
+  distribution of difficulties---difficulties formed as products of many
+  \emph{independent} factors (a multiplicative central-limit argument).
+  Experience acquisition is path-dependent rather than a product of independent
+  factors, so this microfoundation does not apply, even though probit and the
+  logistic are empirically near-indistinguishable.
+
+  \item \textbf{Weibull CDF:} $y(t)=1-\exp\{-(t/\lambda)^\beta\}$, equivalently
+  $\frac{dy}{dt}=h(t)(1-y)$ with
+  $h(t)=\frac{\beta}{\lambda}(t/\lambda)^{\beta-1}$. Its hazard is a function
+  of raw elapsed time, while accumulated progress enters only through the
+  survival term $(1-y)$. This makes it the natural first-passage or repeated
+  sampling baseline. For a single 0--1 reward task with independent attempts of
+  success probability $p$,
+  $P_{\rm pass}(k)=1-(1-p)^k=1-\exp[-k(-\ln(1-p))]$, which is an exponential
+  CDF, the $\beta=1$ Weibull case (approximately $1-\exp(-pk)$ for small
+  $p$). Such a curve improves because repeated independent attempts shrink the
+  remaining failure mass, not because state carried across attempts makes later
+  attempts more effective. Section~\ref{sec:stateful-stateless-analysis} shows
+  that stateful learning beats this repeated-sampling mechanism under the same
+  total budget, and the Weibull CDF also fits worse than the log-sigmoid in
+  Table~\ref{tab:scurve-family-comparison}. Individual improvements may have a
+  first-passage flavor, but the macroscopic best-so-far trajectory accumulates
+  through dependent, stateful steps rather than through a raw-time hazard with no
+  accumulated-progress factor.
+
+  \item \textbf{Log-linear:} $\frac{dy}{d\tau}=b$ (constant). With no
+  saturating term it grows without bound and cannot level off, contradicting the
+  many tasks that reach a ceiling within the budget; it attains by far the worst
+  fit.
+\end{itemize}
+We therefore read the log-sigmoid not merely as the best-fitting S-curve but as
+the curve whose \(y(1-y)\) rate law matches the frontier-expansion interpretation:
+unlocked score mass supplies reusable capability, while locked score mass bounds
+the remaining opportunity for improvement.
+This is a mechanistic preference, not an empirical exclusion---the data cannot
+separate the symmetric families. It is falsifiable through the inflection: a
+symmetric peak near $y=0.5$ is consistent with the logistic (and probit), a
+front-loaded peak near $0.37$ would favor Gompertz, and a back-loaded peak near
+$0.63$ would favor Weibull.

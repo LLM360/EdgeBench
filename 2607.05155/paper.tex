@@ -1,0 +1,167 @@
+\documentclass[]{bytedance_seed}
+
+
+
+\usepackage[toc,page,header]{appendix}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+
+
+\usepackage{minitoc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{dsfont}
+\usepackage{microtype}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{condition}{Condition}[section]
+\newtheorem{assumption}{Assumption}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\1}{\mathds{1}}
+\newcommand{\sigmoid}{\mathsf{sigmoid}}
+\newcommand{\diam}{\operatorname{diam}}
+
+\newenvironment{readingbox}[1]
+{\par\medskip\noindent\begin{minipage}{\linewidth}\hrule\smallskip\noindent\textbf{#1.}\ }
+{\par\smallskip\hrule\end{minipage}\medskip}
+
+
+\newcommand{\benchmark}{EdgeBench}
+\newcommand{\taskroot}{\texttt{SE-bench-task}}
+\newcommand{\BenchTopRule}{\toprule[1.1pt]}
+\newcommand{\BenchMidRule}{\midrule[0.65pt]}
+\newcommand{\BenchBottomRule}{\bottomrule[1.1pt]}
+\newcommand{\BenchCMidRule}[1]{\cmidrule[0.65pt](lr){#1}}
+
+
+\title{\benchmark: Unveiling Scaling Laws of Learning from Real-World Environments}
+
+\affiliation{ByteDance Seed}
+
+\abstract{
+Pretraining scaling laws reveal that model capability improves predictably with data and compute. But learning from real world environments after deployment remains far less understood. Analyzing roughly 38{,}000 hours of agent interaction with the environment across 134 real world tasks, we find, to the best of our knowledge, the first evidence that overall performance during environment learning follows a log-sigmoid scaling law with remarkably high precision, reaching $R^2 = 0.998$. Across model generations, we also find that agent learning speed roughly doubles every three months. This discovery stems from \benchmark{}, a suite of 134 real world tasks with ultra-long horizons, spanning scientific discovery, software engineering, combinatorial optimization, professional knowledge work, formal mathematics, and interactive games. Each task sustains at least 12 hours of continuous agent operation under rich, multilevel feedback, and is built through substantial expert effort. We publicly release 51 tasks and our full evaluation framework to accelerate the study of how agents learn from real world experience.
+}
+
+\titlefigure{%
+\begin{center}
+\centering
+\includegraphics[width=\linewidth]{figures/fig_full_136_curve_fit_side_by_side.pdf}
+\captionof{figure}{\textbf{Overall performance follows a precise log-sigmoid
+relationship with environment interaction time} when averaged over all 134 tasks
+(mean $R^2 = 0.998$).}
+\label{fig:logtime-sigmoid-all-tasks}
+\end{center}
+}
+
+\date{\today}
+\correspondence{Shu Zhong at \email{zhongshu@bytedance.com}}
+
+\checkdata[Project Page]{\url{https://edge-bench.org}}
+
+\begin{document}
+\maketitle
+
+
+\input{sections/introduction}
+\input{sections/approach}
+\input{sections/emerging_scaling}
+\input{sections/scaling}
+\input{sections/experiments}
+\input{sections/relatedwork}
+\input{sections/conclusion}
+
+\clearpage
+\section*{Author Contributions}
+
+\newcommand{\contribrole}[2]{\noindent\textbf{#1}\nopagebreak\par#2\par\medskip}
+
+\begin{multicols}{2}
+\raggedright
+\setlength{\parskip}{1pt}
+\contribrole{Core Contributors}{Deyao Zhu\textsuperscript{*}\\ Xin Zhou\textsuperscript{*}\\ Shengling Qin\textsuperscript{*}\\ Xuekai Zhu\textsuperscript{*}\\ Hangliang Ding\textsuperscript{*}\\ Shu Zhong\textsuperscript{*\textdagger}}
+\contribrole{Theory}{Zixin Wen}
+\contribrole{Data Collection and Curation}{Zhonglin Xie\\ Chenhui Gou\\ Linxuan Ren\\ Yueyang Wang\\ Junfeng Zhong\\ Rui Liu\\ Tian Gao\\ Yangguang Lin\\ Jingyuan Zhang\\ Maojia Song\\ Xuan Qi\textsuperscript{\ensuremath{\ddagger}}\\ Jinhong Wu\textsuperscript{\ensuremath{\ddagger}}\\ Chenyang Zhang\textsuperscript{\ensuremath{\ddagger}}\\ Yinzhu Piao\\ Ziru Niu\\ Hongbin Lin\\ Lingxiang Meng\\ Peng Tang\\ Chengyao Tang\\ Shanyu Wu\\ Huanyu Zheng\\ Yu Liu\\ Liya Zhu\\ He Wang\\ Ming Ding}
+\contribrole{Data Infrastructure}{Ziyu Wan\\ Hao Liu\\ Sibo Wang\\ Haotian Zhu\\ Xintian Zhang\\ Nan Chai\\ Yipeng Liu\\ Panhao Lai}
+\contribrole{Referrals}{Sihang Yuan\\ Zixin Su\\ Ge Zhang\\ Wangchunshu Zhou\\ Yantao Du}
+\contribrole{Advisors}{Wenhao Huang\\ Guang Shi}
+\end{multicols}
+
+\medskip
+\noindent\textsuperscript{*}Equal contribution\hspace{1em}\textsuperscript{\textdagger}Project Lead\hspace{1em}\textsuperscript{\ensuremath{\ddagger}}External contributor
+
+\clearpage
+
+\bibliographystyle{plainnat}
+\bibliography{main}
+
+\clearpage
+
+\beginappendix
+
+\section*{Appendix Contents}
+\begingroup
+\small
+\setlength{\parskip}{0.15em}
+\newcommand{\appentry}[2]{\noindent\hyperref[#1]{\makebox[1.7em][l]{\ref*{#1}}#2}\dotfill\pageref{#1}\par}
+\newcommand{\appsubentry}[2]{\noindent\hspace*{1.5em}\hyperref[#1]{\makebox[2.5em][l]{\ref*{#1}}#2}\dotfill\pageref{#1}\par}
+
+\appentry{sec:construction}{Evaluation Harness}
+\appentry{sec:gpt54-serving-stability}{Serving and API Stability}
+\appentry{sec:appendix-evaluation-hacking}{Evaluation Hacking}
+\appentry{sec:theory}{A Comprehensive Derivation of the Log-Sigmoid Law}
+\appsubentry{subsec:theory-prelim}{Preliminaries: Latent Capability Graph and the Attainable Support}
+\appsubentry{subsec:single-task-frontier}{Environment Learning as a Frontier Expansion Process}
+\appsubentry{subsec:aggregate-frontier-limit}{Many-task Aggregation Reveals the Smooth Log-Sigmoid Law}
+\appsubentry{subsec:self-similar-log-time}{Graph Self-similarity Induces Log Scale for Time Axis}
+\appsubentry{subsec:theory-discussion-limitations}{Discussion and Limitations}
+\appentry{sec:scaling-law-discussion}{More Discussion on the Scaling Law Shapes}
+\appentry{sec:additional-related-work}{Additional Related Work}
+\appsubentry{sec:additional-related-work-not-self-evolution}{Benchmarks Not Suitable for Measuring Self-Evolution}
+\appsubentry{sec:additional-related-work-learning}{Benchmarks Suitable for Measuring Learning or Self-Evolution}
+\appsubentry{sec:additional-related-work-scaling-laws}{Scaling Laws for LLMs and Agents}
+\appentry{sec:additional-benchmark-details}{Additional Benchmark and Experiment Details}
+\appsubentry{sec:experience-gain-estimation}{Estimating the With- and Without-Experience Curves}
+\appsubentry{sec:appendix-gw-case-study-details}{Gravitational-Wave Case Study Details}
+\appsubentry{sec:ablation-experiment-setting}{Harness-Level Continuation Ablations}
+\appsubentry{sec:task-by-task-design-notes}{Per-Task Design Notes}
+\appsubentry{sec:all-curves}{Per-Task Learning Curves}
+\appsubentry{sec:appendix-category-scores}{Per-Task Score Tables}
+\appentry{sec:acknowledgements}{Acknowledgements}
+\endgroup
+\clearpage
+
+\input{sections/construction}
+\input{sections/serving_api_stability}
+\input{sections/evaluation_hacking}
+\input{sections/theory}
+\input{sections/scaling_law_discussion}
+\input{sections/additional_relatedwork}
+\input{sections/appendix}
+\clearpage
+\input{sections/acknowledgements}
+
+\end{document}
