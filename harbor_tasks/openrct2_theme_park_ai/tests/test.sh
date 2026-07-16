@@ -12,8 +12,5 @@ eval_status=${PIPESTATUS[0]}
 set -e
 
 python3 /tests/write_reward.py \
-    --kind linear \
-    --lower 0 \
-    --upper 40000 \
     --eval-status "$eval_status" \
     "$log_path"

@@ -12,7 +12,6 @@ keywords = ["edgebench", "games", "openrct2", "javascript", "optimization"]
 category = "Interactive Games & Simulators"
 original_task_id = "openrct2_theme_park_ai"
 original_score_parser = "score_sum"
-raw_score_rescale = "linear(lower=0, upper=40000)"
 
 [verifier]
 timeout_sec = 2400.0
