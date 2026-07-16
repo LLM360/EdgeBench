@@ -1,0 +1,34 @@
+schema_version = "1.3"
+source = "edgebench"
+artifacts = ["/home/workspace/openttd_ai/my_ai"]
+
+[task]
+name = "edgebench/openttd_transport_ai"
+description = "Build an OpenTTD NoAI transport company that maximizes company value across random maps."
+authors = [{ name = "ByteDance Seed" }]
+keywords = ["edgebench", "games", "openttd", "squirrel", "optimization"]
+
+[metadata]
+category = "Interactive Games & Simulators"
+original_task_id = "openttd_transport_ai"
+original_score_parser = "score_sum"
+raw_score_rescale = "log_max(baseline=100000, expert=1000000000)"
+
+[verifier]
+timeout_sec = 3600.0
+user = "root"
+environment_mode = "separate"
+
+[verifier.environment]
+network_mode = "no-network"
+build_timeout_sec = 600.0
+os = "linux"
+
+[agent]
+user = "agent"
+
+[environment]
+docker_image = "seededge/edgebench.work.openttd_transport_ai@sha256:23afcb796abfdefc6c4ba1660b85fde34768aeb59267139da36a28854f1ff969"
+network_mode = "no-network"
+os = "linux"
+workdir = "/home/workspace/openttd_ai"
